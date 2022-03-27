@@ -1,0 +1,29 @@
+<h1>Categorias</h1>
+<a routerLink="add" class="btn btn-sm btn-success mb-2">Agregar Categoria</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th style="width: 30%">id</th>
+            <th style="width: 40%">Descripción</th>
+            <th style="width: 30%">Acción</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let cat of agentes">
+            <td>{{cat.id}}</td>
+            <td>{{cat.descripcion}}</td>
+            <td style="white-space: nowrap">
+                <a routerLink="edit/{{cat.id}}" class="btn btn-sm btn-primary mr-1">Editar</a>
+                <button (click)="eliminar(cat.id)" class="btn btn-sm btn-danger btn-delete-user" [disabled]="cat.isDeleting">
+                    <span *ngIf="cat.isDeleting" class="spinner-border spinner-border-sm"></span>
+                    <span *ngIf="!cat.isDeleting">Eliminar</span>
+                </button>
+            </td>
+        </tr>
+        <tr *ngIf="!agentes">
+            <td colspan="4" class="text-center">
+                <span class="spinner-border spinner-border-lg align-center"></span>
+            </td>
+        </tr>
+    </tbody>
+</table>
