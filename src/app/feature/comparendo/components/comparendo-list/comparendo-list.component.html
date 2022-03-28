@@ -1,19 +1,25 @@
-<h1>Agentes</h1>
-<a routerLink="add" class="btn btn-sm btn-success mb-2">Agregar Agente</a>
+<h1>Administración de Comparendos</h1>
+<a routerLink="add" class="btn btn-sm btn-success mb-2">Registrar Comparendo</a>
 <table class="table table-striped">
     <thead>
         <tr>
             <th style="width: 30%">id</th>
-            <th style="width: 40%">Nombre</th>
-            <th style="width: 40%">Telefono</th>
+            <th style="width: 40%">Posibles Infractores</th>
+            <th style="width: 40%">Agentes</th>
+            <th style="width: 40%">Categorias</th>
+            <th style="width: 40%">Fecha/Hora</th>
+            <th style="width: 40%">Pago</th>
             <th style="width: 30%">Acción</th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let item of agentes">
+        <tr *ngFor="let item of comparendos">
             <td>{{item.id}}</td>
-            <td>{{item.nombre}}</td>
-            <td>{{item.telefono}}</td>
+            <td>{{item.posibles_infractoresId}}</td>
+            <td>{{item.agentesId}}</td>
+            <td>{{item.categoriasId}}</td>
+            <td>{{item.fecha}}</td>
+            <td></td>
             <td style="white-space: nowrap">
                 <a routerLink="edit/{{item.id}}" class="btn btn-sm btn-primary mr-1">Editar</a>
                 <button (click)="eliminar(item.id)" class="btn btn-sm btn-danger btn-delete-user"
@@ -23,7 +29,7 @@
                 </button>
             </td>
         </tr>
-        <tr *ngIf="!agentes">
+        <tr *ngIf="!comparendos">
             <td colspan="4" class="text-center">
                 <span class="spinner-border spinner-border-lg align-center"></span>
             </td>

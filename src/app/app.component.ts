@@ -14,7 +14,7 @@ export class AppComponent {
     { url: '/producto', nombre: 'Producto' },
     { url: '/agente', nombre: 'Agente' },
     { url: '/categoria', nombre: 'Categoria' },
-    { url: '/comparendos', nombre: 'Comparendos' }
+    { url: '/comparendo', nombre: 'Comparendos' }
   ];
 
   constructor(translate: TranslateService) {

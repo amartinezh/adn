@@ -24,6 +24,9 @@
       "@agente/*": [
         "src/app/feature/agente/*"
       ],
+      "@comparendo/*": [
+        "src/app/feature/comparendo/*"
+      ],
       "@categoria/*": [
         "src/app/feature/categoria/*"
       ],

@@ -11,6 +11,9 @@
       "@categoria/*": [
         "src/app/feature/categoria/*"
       ],
+      "@comparendo/*": [
+        "src/app/feature/comparendo/*"
+      ],
       "@core/*": [
         "src/app/core/*"
       ],
