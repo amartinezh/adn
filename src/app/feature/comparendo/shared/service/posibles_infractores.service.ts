@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { HttpService } from '@core-service/http.service';
 import { environment } from 'src/environments/environment';
@@ -9,7 +10,10 @@ export class PosiblesInfractorService {
   constructor(protected http: HttpService) { }
 
   public consultar() {
-    var baseUrl = environment.endpoint+"/posibles_infractores";
+    const fecha_hoy = new Date();
+    let fecha__dos_dias_antes = new Date().setDate(fecha_hoy.getDate() - 2);
+    const fecha_f = formatDate(fecha__dos_dias_antes, 'yyyy-MM-dd', 'en-US');
+    var baseUrl = environment.endpoint + "/posibles_infractores?fecha_lectura_gte="+fecha_f;
     return this.http.doGet<PosiblesInfractor[]>(baseUrl);
   }
 
@@ -22,10 +26,10 @@ export class PosiblesInfractorService {
       return this.http.doPost<PosiblesInfractor, boolean>(`${environment.endpoint}/posibles_infractores`, comparendo,
         this.http.optsName('crear posibles infractores'));
     }
-    else{
+    else {
       debugger
       return this.http.doPost<PosiblesInfractor, boolean>(`${environment.endpoint}/posibles_infractores/${id}`, comparendo,
-      this.http.optsName('modificar posibles infractores'));
+        this.http.optsName('modificar posibles infractores'));
     }
   }
 

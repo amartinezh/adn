@@ -19,6 +19,7 @@ export class ComparendoAddComponent implements OnInit {
     form!: FormGroup;
     id!: string;
     isAddMode!: boolean;
+    isAgenteValido!: boolean;
     loading = false;
     submitted = false;
     habilitado = true;
@@ -40,7 +41,10 @@ export class ComparendoAddComponent implements OnInit {
     ngOnInit() {
         this.posiblesInfractorService.consultar()
             .pipe(first())
-            .subscribe(res => this.posiblesInfractores = res);
+            .subscribe(res => {
+                this.posiblesInfractores = res;
+            });
+
         this.agenteService.consultar()
             .pipe(first())
             .subscribe(res => this.agentes = res);
@@ -55,13 +59,15 @@ export class ComparendoAddComponent implements OnInit {
             posibles_infractoresId: ['', Validators.required],
             agentesId: ['', Validators.required],
             categoriasId: ['', Validators.required],
-            fecha: new Date
+            fecha: new Date,
+            valor: ['', Validators.required]
         }, formOptions);
         if (!this.isAddMode) {
             this.comparendoService.consultarId(this.id)
                 .pipe(first())
                 .subscribe(x => this.form.patchValue(x));
         }
+
     }
 
     // convenience getter for easy access to form fields
@@ -80,6 +86,29 @@ export class ComparendoAddComponent implements OnInit {
             this.createComparendo();
         } else {
             this.updateComparendo();
+        }
+    }
+
+    onSelectPosibleInfractor(item) {
+        const objectKeys = Object.values(item);
+        const peso_leido = +objectKeys[2]!;
+        const peso_permitido = +objectKeys[3];
+        const sobre_paso = peso_permitido - peso_leido;
+        console.log(sobre_paso);
+    }
+
+    onSelectAgente(item) {
+        const objectKeys = Object.values(item);
+        const hora = new Date();
+        const hora_inicio_labor = objectKeys[3];
+        const hora_fin_labor = objectKeys[4];
+        if (hora.getHours() >= hora_inicio_labor && hora.getHours() < hora_fin_labor){
+            this.isAgenteValido= false;
+            this.loading = false;
+        }
+        else{
+            this.isAgenteValido= true;
+            this.loading = true;
         }
     }
 

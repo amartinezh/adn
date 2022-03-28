@@ -29,7 +29,7 @@ describe('ProductoService', () => {
 
   it('deberia listar productos', () => {
     const dummyProductos = [
-      new Agente('1', 'Producto 1'), new Agente('2', 'Producto 2')
+      new Agente('1', 'Producto 1', '', 1, 1), new Agente('2', 'Producto 2', '', 1, 1)
     ];
     service.consultar().subscribe(productos => {
       expect(productos.length).toBe(2);
@@ -41,7 +41,7 @@ describe('ProductoService', () => {
   });
 
   it('deberia crear un producto', () => {
-    const dummyProducto = new Agente('1', 'Producto 1');
+    const dummyProducto = new Agente('1', 'Producto 1', '', 1, 1);
     service.guardar(dummyProducto).subscribe((respuesta) => {
       expect(respuesta).toEqual(true);
     });
@@ -51,7 +51,7 @@ describe('ProductoService', () => {
   });
 
   it('deberia eliminar un producto', () => {
-    const dummyProducto = new Agente('1', 'Producto 1');
+    const dummyProducto = new Agente('1', 'Producto 1', '', 1, 1);
     service.eliminar(dummyProducto.id).subscribe((respuesta) => {
       expect(respuesta).toEqual(true);
     });

@@ -52,9 +52,9 @@ describe('ProductoService', () => {
 
   it('deberia eliminar un producto', () => {
     const dummyProducto = new Categoria('1', 'Producto 1');
-    //service.eliminar(dummyProducto).subscribe((respuesta) => {
-    //  expect(respuesta).toEqual(true);
-    //});
+    service.eliminar(dummyProducto.id).subscribe((respuesta) => {
+      expect(respuesta).toEqual(true);
+    });
     const req = httpMock.expectOne(`${apiEndpointProductos}/1`);
     expect(req.request.method).toBe('DELETE');
     req.event(new HttpResponse<boolean>({body: true}));
