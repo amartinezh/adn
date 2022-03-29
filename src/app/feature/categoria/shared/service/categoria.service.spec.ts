@@ -10,8 +10,7 @@ import { HttpResponse } from '@angular/common/http';
 describe('ProductoService', () => {
   let httpMock: HttpTestingController;
   let service: CategoriaService;
-  const apiEndpointProductoConsulta = `${environment.endpoint}/tiposFamilia`;
-  const apiEndpointProductos = `${environment.endpoint}/productos`;
+  const apiEndpoint = `${environment.endpoint}/categorias`;
 
   beforeEach(() => {
     const injector = TestBed.configureTestingModule({
@@ -23,11 +22,11 @@ describe('ProductoService', () => {
   });
 
   it('should be created', () => {
-    const productService: CategoriaService = TestBed.inject(CategoriaService);
-    expect(productService).toBeTruthy();
+    const categoriaService: CategoriaService = TestBed.inject(CategoriaService);
+    expect(categoriaService).toBeTruthy();
   });
 
-  it('deberia listar productos', () => {
+  it('deberia listar categorias', () => {
     const dummyProductos = [
       new Categoria('1', 'Producto 1'), new Categoria('2', 'Producto 2')
     ];
@@ -35,7 +34,7 @@ describe('ProductoService', () => {
       expect(productos.length).toBe(2);
       expect(productos).toEqual(dummyProductos);
     });
-    const req = httpMock.expectOne(apiEndpointProductoConsulta);
+    const req = httpMock.expectOne(apiEndpoint);
     expect(req.request.method).toBe('GET');
     req.flush(dummyProductos);
   });
@@ -45,17 +44,17 @@ describe('ProductoService', () => {
     service.guardar(dummyProducto).subscribe((respuesta) => {
       expect(respuesta).toEqual(true);
     });
-    const req = httpMock.expectOne(apiEndpointProductos);
+    const req = httpMock.expectOne(apiEndpoint);
     expect(req.request.method).toBe('POST');
     req.event(new HttpResponse<boolean>({body: true}));
   });
 
   it('deberia eliminar un producto', () => {
-    const dummyProducto = new Categoria('1', 'Producto 1');
+    const dummyProducto = new Categoria('99', 'Producto 1');
     service.eliminar(dummyProducto.id).subscribe((respuesta) => {
       expect(respuesta).toEqual(true);
     });
-    const req = httpMock.expectOne(`${apiEndpointProductos}/1`);
+    const req = httpMock.expectOne(`${apiEndpoint}/99`);
     expect(req.request.method).toBe('DELETE');
     req.event(new HttpResponse<boolean>({body: true}));
   });
