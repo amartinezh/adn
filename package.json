@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.conf.json -o",
-    "build": "ng build --prod",
-    "test": "ng test --code-coverage",
+    "build": "ng build --configuration production",
+    "test": "ng test --browsers=ChromeHeadless --code-coverage",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
