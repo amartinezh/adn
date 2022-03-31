@@ -6,11 +6,19 @@ import { InternacionalizacionComponent } from './feature/internacionalizacion/in
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent, canActivate: [SecurityGuard]  },
+  { path: 'home', component: HomeComponent, canActivate: [SecurityGuard] },
   { path: 'agente', loadChildren: () => import('@agente/agente.module').then(mod => mod.AgenteModule), canActivate: [SecurityGuard] },
-  { path: 'categoria', loadChildren: () => import('@categoria/categoria.module').then(mod => mod.CategoriaModule), canActivate: [SecurityGuard] },
-  { path: 'comparendo', loadChildren: () => import('@comparendo/comparendo.module').then(mod => mod.ComparendoModule), canActivate: [SecurityGuard] },
-  { path: 'internacionalizacion', component: InternacionalizacionComponent, canActivate: [SecurityGuard]  }
+  {
+    path: 'categoria',
+    loadChildren: () => import('@categoria/categoria.module').then(mod => mod.CategoriaModule),
+    canActivate: [SecurityGuard]
+  },
+  {
+    path: 'comparendo',
+    loadChildren: () => import('@comparendo/comparendo.module').then(mod => mod.ComparendoModule),
+    canActivate: [SecurityGuard]
+  },
+  { path: 'internacionalizacion', component: InternacionalizacionComponent, canActivate: [SecurityGuard] }
 ];
 
 @NgModule({

@@ -1,9 +1,7 @@
-import { browser, by, element } from 'protractor';
+import { by, element } from 'protractor';
 
 export class AgentePage {
-    navigateTo() {
-        return browser.get(browser.baseUrl) as Promise<any>;
-      }
+
     // Acciones Listar Agentes
     private listaAgentes = element.all(by.id('linkBodyListaAgentes'));
     linkAgente = element(by.xpath('/html/body/app-root/app-navbar/div/button/nav/div/ul/li/a[2]'));

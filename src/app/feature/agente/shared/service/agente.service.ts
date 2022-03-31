@@ -18,7 +18,6 @@ export class AgenteService {
   }
 
   public guardar(agente: Agente, id?: string) {
-    debugger
     if (id === 'nuevo') {
       return this.http.doPost<Agente, boolean>(`${environment.endpoint}/agentes`, agente);
     }

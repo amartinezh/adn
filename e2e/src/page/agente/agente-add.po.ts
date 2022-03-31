@@ -1,9 +1,7 @@
-import { browser, by, element } from 'protractor';
+import { by, element } from 'protractor';
 
 export class AgenteAddPage {
-    navigateTo() {
-        return browser.get(browser.baseUrl) as Promise<any>;
-      }
+
     // Elementos Crear Agente
     private linkBotonCrearAgente = element(by.id('linkBotonCrearAgente'));
     private linkBotonCancelarOperacion = element(by.id('linkBotonCancelarOperacion'));
