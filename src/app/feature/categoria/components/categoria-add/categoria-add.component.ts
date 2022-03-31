@@ -25,15 +25,13 @@ export class CategoriaAddComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-      this.id = this.route.snapshot.params['id'];
+      this.id = this.route.snapshot.params.id;
       this.isAddMode = !this.id;
-      
       const formOptions: AbstractControlOptions = {  };
       this.form = this.formBuilder.group({
           id: ['', Validators.required],
           descripcion: ['', Validators.required],
       }, formOptions);
-      
       if (!this.isAddMode) {
           this.categoriaService.consultarId(this.id)
               .pipe(first())

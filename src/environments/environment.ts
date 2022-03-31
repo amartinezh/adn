@@ -4,9 +4,7 @@
 
 export const environment = {
   production: false,
-  //endpoint: 'https://8e33bb9a-f5db-42b3-852b-9674222e80c7.mock.pstmn.io'
   endpoint: 'http://localhost:3000'
-  
 };
 
 /*

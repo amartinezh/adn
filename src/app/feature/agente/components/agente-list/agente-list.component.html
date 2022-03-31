@@ -1,5 +1,5 @@
 <h1>Agentes</h1>
-<a routerLink="add" class="btn btn-sm btn-success mb-2">Agregar Agente</a>
+<a id="linkAgregarAgente" routerLink="add" class="btn btn-sm btn-success mb-2">Agregar Agente</a>
 <table class="table table-striped">
     <thead>
         <tr>
@@ -10,13 +10,13 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let item of agentes">
+        <tr id="linkBodyListaAgentes" *ngFor="let item of agentes">
             <td>{{item.id}}</td>
             <td>{{item.nombre}}</td>
             <td>{{item.telefono}}</td>
             <td style="white-space: nowrap">
-                <a routerLink="edit/{{item.id}}" class="btn btn-sm btn-primary mr-1">Editar</a>
-                <button (click)="eliminar(item.id)" class="btn btn-sm btn-danger btn-delete-user"
+                <a id="linkEditarAgente" routerLink="edit/{{item.id}}" class="btn btn-sm btn-primary mr-1">Editar</a>
+                <button id="linkEliminarAgente" (click)="eliminar(item.id)" class="btn btn-sm btn-danger btn-delete-user"
                     [disabled]="item.isDeleting">
                     <span *ngIf="item.isDeleting" class="spinner-border spinner-border-sm"></span>
                     <span *ngIf="!item.isDeleting">Eliminar</span>

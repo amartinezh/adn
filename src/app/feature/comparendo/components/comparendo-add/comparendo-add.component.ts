@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { first } from 'rxjs/operators';
 import { ComparendoService } from '../../shared/service/comparendo.service';
 import { PosiblesInfractorService } from '@comparendo/shared/service/posibles_infractores.service';
 import { PosiblesInfractor } from '@comparendo/shared/model/posibles_infractores';
-import { Categoria } from '@categoria/shared/model/categoria';
-import { CategoriaService } from '@categoria/shared/service/categoria.service';
-import { Agente } from '@agente/shared/model/agente';
-import { AgenteService } from '@agente/shared/service/agente.service';
+import { first } from 'rxjs/operators';
+
+import { AgenteSharedService } from '@shared/services/Agente/agente.shared.service';
+import { Categoria } from '@shared/models/Categoria/categoria';
+import { CategoriaSharedService } from '@shared/services/Categoria/categoria.service';
+import { Agente } from '@shared/models/Agente/agente';
 
 @Component({
     selector: 'app-comparendo-add',
@@ -23,7 +24,7 @@ export class ComparendoAddComponent implements OnInit {
     loading = false;
     submitted = false;
     habilitado = true;
-    fecha_hora = new Date();
+    fechaHora = new Date();
     agentes!: Agente[];
     categorias!: Categoria[];
     posiblesInfractores!: PosiblesInfractor[];
@@ -32,8 +33,8 @@ export class ComparendoAddComponent implements OnInit {
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
-        private agenteService: AgenteService,
-        private categoriaService: CategoriaService,
+        private agenteService: AgenteSharedService,
+        private categoriaService: CategoriaSharedService,
         private comparendoService: ComparendoService,
         private posiblesInfractorService: PosiblesInfractorService
     ) { }
@@ -44,14 +45,13 @@ export class ComparendoAddComponent implements OnInit {
             .subscribe(res => {
                 this.posiblesInfractores = res;
             });
-
         this.agenteService.consultar()
             .pipe(first())
             .subscribe(res => this.agentes = res);
         this.categoriaService.consultar()
             .pipe(first())
             .subscribe(res => this.categorias = res);
-        this.id = this.route.snapshot.params["id"];
+        this.id = this.route.snapshot.params.id;
         this.isAddMode = !this.id;
         const formOptions: AbstractControlOptions = {};
         this.form = this.formBuilder.group({
@@ -59,7 +59,7 @@ export class ComparendoAddComponent implements OnInit {
             posibles_infractoresId: ['', Validators.required],
             agentesId: ['', Validators.required],
             categoriasId: ['', Validators.required],
-            fecha: new Date,
+            fecha: new Date(),
             valor: ['', Validators.required]
         }, formOptions);
         if (!this.isAddMode) {
@@ -91,23 +91,23 @@ export class ComparendoAddComponent implements OnInit {
 
     onSelectPosibleInfractor(item) {
         const objectKeys = Object.values(item);
-        const peso_leido = +objectKeys[2]!;
-        const peso_permitido = +objectKeys[3];
-        const sobre_paso = peso_permitido - peso_leido;
-        console.log(sobre_paso);
+        const pesoLeido = +objectKeys[2];
+        const pesoPermitido = +objectKeys[3];
+        const sobrePaso = pesoPermitido - pesoLeido;
+        console.log(sobrePaso);
     }
 
     onSelectAgente(item) {
         const objectKeys = Object.values(item);
         const hora = new Date();
-        const hora_inicio_labor = objectKeys[3];
-        const hora_fin_labor = objectKeys[4];
-        if (hora.getHours() >= hora_inicio_labor && hora.getHours() < hora_fin_labor){
-            this.isAgenteValido= false;
+        const horaInicioLabor = objectKeys[3];
+        const horaFinLabor = objectKeys[4];
+        if (hora.getHours() >= horaInicioLabor && hora.getHours() < horaFinLabor){
+            this.isAgenteValido = false;
             this.loading = false;
         }
         else{
-            this.isAgenteValido= true;
+            this.isAgenteValido = true;
             this.loading = true;
         }
     }

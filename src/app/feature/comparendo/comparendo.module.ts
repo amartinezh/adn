@@ -6,6 +6,7 @@ import { ComparendoListComponent } from './components/comparendo-list/comparendo
 import { ComparendoAddComponent } from './components/comparendo-add/comparendo-add.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ComparendoService } from './shared/service/comparendo.service';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     AgenteRoutingModule,
     ReactiveFormsModule
+  ],
+  providers: [
+    ComparendoService
   ]
 })
-export class AgenteModule { }
+export class ComparendoModule { }

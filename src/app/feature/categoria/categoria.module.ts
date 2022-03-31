@@ -6,7 +6,7 @@ import { CategoriaListComponent } from './components/categoria-list/categoria-li
 import { CategoriaAddComponent } from './components/categoria-add/categoria-add.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { CategoriaService } from './shared/service/categoria.service';
 
 @NgModule({
   declarations: [
@@ -18,6 +18,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     CategoriaRoutingModule,
     ReactiveFormsModule
+  ],
+  providers: [
+    CategoriaService
   ]
 })
 export class CategoriaModule { }

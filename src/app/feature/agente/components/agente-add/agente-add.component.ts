@@ -25,7 +25,7 @@ export class AgenteAddComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-      this.id = this.route.snapshot.params["id"];
+      this.id = this.route.snapshot.params.id;
       this.isAddMode = !this.id;
       const formOptions: AbstractControlOptions = {  };
       this.form = this.formBuilder.group({
@@ -60,7 +60,7 @@ export class AgenteAddComponent implements OnInit {
   }
 
   private createAgente() {
-      this.agenteService.guardar(this.form.value)
+      this.agenteService.guardar(this.form.value, 'nuevo')
           .pipe(first())
           .subscribe(() => {
               this.router.navigate(['../'], { relativeTo: this.route });

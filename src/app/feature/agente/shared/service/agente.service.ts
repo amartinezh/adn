@@ -3,13 +3,13 @@ import { HttpService } from '@core-service/http.service';
 import { environment } from 'src/environments/environment';
 import { Agente } from '../model/agente';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class AgenteService {
 
   constructor(protected http: HttpService) { }
 
   public consultar() {
-    var baseUrl = environment.endpoint+"/agentes";
+    const baseUrl = environment.endpoint + '/agentes';
     return this.http.doGet<Agente[]>(baseUrl);
   }
 
@@ -17,15 +17,13 @@ export class AgenteService {
     return this.http.doGet<Agente[]>(`${environment.endpoint}/agentes/` + id, this.http.optsName('consultar agentes'));
   }
 
-  public guardar(categoria: Agente, id?: string) {
-    if (id == undefined) {
-      return this.http.doPost<Agente, boolean>(`${environment.endpoint}/agentes`, categoria,
-        this.http.optsName('crear agentes'));
+  public guardar(agente: Agente, id?: string) {
+    debugger
+    if (id === 'nuevo') {
+      return this.http.doPost<Agente, boolean>(`${environment.endpoint}/agentes`, agente);
     }
     else{
-      debugger
-      return this.http.doPost<Agente, boolean>(`${environment.endpoint}/agentes/${id}`, categoria,
-      this.http.optsName('modificar agentes'));
+      return this.http.doPost<Agente, boolean>(`${environment.endpoint}/agentes/${id}`, agente);
     }
   }
 

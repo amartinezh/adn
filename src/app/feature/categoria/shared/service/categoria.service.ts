@@ -3,13 +3,13 @@ import { HttpService } from '@core-service/http.service';
 import { environment } from 'src/environments/environment';
 import { Categoria } from '../model/categoria';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class CategoriaService {
 
   constructor(protected http: HttpService) { }
 
   public consultar() {
-    var baseUrl = environment.endpoint+"/categorias";
+    const baseUrl = environment.endpoint + '/categorias';
     return this.http.doGet<Categoria[]>(baseUrl);
   }
 
@@ -18,12 +18,11 @@ export class CategoriaService {
   }
 
   public guardar(categoria: Categoria, id?: string) {
-    if (id == undefined) {
+    if (id === undefined) {
       return this.http.doPost<Categoria, boolean>(`${environment.endpoint}/categorias`, categoria,
         this.http.optsName('crear categorias'));
     }
     else{
-      debugger
       return this.http.doPost<Categoria, boolean>(`${environment.endpoint}/categorias/${id}`, categoria,
       this.http.optsName('modificar categorias'));
     }

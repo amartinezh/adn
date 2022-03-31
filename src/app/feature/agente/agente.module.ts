@@ -6,6 +6,7 @@ import { AgenteListComponent } from './components/agente-list/agente-list.compon
 import { AgenteAddComponent } from './components/agente-add/agente-add.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AgenteService } from './shared/service/agente.service';
 
 
 @NgModule({
@@ -18,6 +19,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     AgenteRoutingModule,
     ReactiveFormsModule
+  ],
+  providers: [
+    AgenteService
   ]
 })
 export class AgenteModule { }

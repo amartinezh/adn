@@ -3,13 +3,13 @@ import { HttpService } from '@core-service/http.service';
 import { environment } from 'src/environments/environment';
 import { Comparendo } from '../model/comparendo';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class ComparendoService {
 
   constructor(protected http: HttpService) { }
 
   public consultar() {
-    var baseUrl = environment.endpoint+"/comparendos";
+    const baseUrl = environment.endpoint + '/comparendos';
     return this.http.doGet<Comparendo[]>(baseUrl);
   }
 
@@ -18,12 +18,11 @@ export class ComparendoService {
   }
 
   public guardar(comparendo: Comparendo, id?: string) {
-    if (id == undefined) {
+    if (id === undefined) {
       return this.http.doPost<Comparendo, boolean>(`${environment.endpoint}/comparendos`, comparendo,
         this.http.optsName('crear comparendos'));
     }
     else{
-      debugger
       return this.http.doPost<Comparendo, boolean>(`${environment.endpoint}/comparendos/${id}`, comparendo,
       this.http.optsName('modificar comparendos'));
     }

@@ -4,46 +4,43 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from '@home/home.component';
-import { ProductoModule } from '@producto/producto.module';
-import { AgenteModule } from '@agente/agente.module';
-import { CategoriaModule } from '@categoria/categoria.module';
 import { CoreModule } from '@core/core.module';
 import { CookieService } from 'ngx-cookie-service';
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslationComponent } from './feature/translation/translation.component';
 import { InternacionalizacionComponent } from './feature/internacionalizacion/internacionalizacion.component';
+import { SharedModule } from '@shared/shared.module';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
-	return new TranslateHttpLoader(httpClient);
+    return new TranslateHttpLoader(httpClient);
 }
 
 @NgModule({
-	declarations: [
-		AppComponent,
-		HomeComponent
-		, TranslationComponent
-		, InternacionalizacionComponent
-	],
-	imports: [
-		BrowserModule,
-		AppRoutingModule,
-		AgenteModule,
-		ProductoModule,
-		CategoriaModule,
-		CoreModule
-		, TranslateModule.forRoot({
-			loader: {
-				provide: TranslateLoader,
-				useFactory: HttpLoaderFactory,
-				deps: [HttpClient]
-			}
-		})
-	],
-	providers: [CookieService],
-	bootstrap: [AppComponent],
-	schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    declarations: [
+        AppComponent,
+        HomeComponent
+        , TranslationComponent
+        , InternacionalizacionComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        CoreModule,
+        SharedModule
+        , TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        }),
+        HttpClientModule
+    ],
+    providers: [CookieService],
+    bootstrap: [AppComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

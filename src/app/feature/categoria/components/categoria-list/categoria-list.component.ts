@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
-import { CategoriaService } from '../../shared/service/categoria.service'
-import { Categoria } from '../../shared/model/categoria'
+import { CategoriaService } from '../../shared/service/categoria.service';
+import { Categoria } from '../../shared/model/categoria';
 
 @Component({
   selector: 'app-categoria-list',
@@ -23,7 +23,9 @@ export class CategoriaListComponent implements OnInit {
 
   eliminar(id: string) {
       const cat = this.categorias.find(x => x.id === id);
-      if (!cat) return;
+      if (!cat) {
+        return;
+      }
       cat.isDeleting = true;
       this.categoriaService.eliminar(id)
           .pipe(first())

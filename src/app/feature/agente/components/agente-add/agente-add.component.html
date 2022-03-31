@@ -4,14 +4,14 @@
     <div class="form-row">
         <div class="form-group col-12">
             <label>Id</label>
-            <input type="text" formControlName="id" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.id.errors }" />
+            <input id="linkInputIdCrearAgente" type="text" formControlName="id" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.id.errors }" />
             <div *ngIf="submitted && f.id.errors" class="invalid-feedback">
                 <div *ngIf="f.id.errors.required">El id es rquerido</div>
             </div>
         </div>
         <div class="form-group col-12">
             <label>Nombre</label>
-            <input type="text" formControlName="nombre" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.descripcion.errors }" />
+            <input id="linkInputNombreCrearAgente" type="text" formControlName="nombre" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.descripcion.errors }" />
             <div *ngIf="submitted && f.nombre.errors" class="invalid-feedback">
                 <div *ngIf="f.nombre.errors.required">EL nombre es requerido</div>
             </div>
@@ -25,10 +25,10 @@
         </div>
     </div>
     <div class="form-group">
-        <button [disabled]="loading" class="btn btn-primary">
+        <button id = "linkBotonCrearAgente" [disabled]="loading" class="btn btn-primary">
             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
             Guardar
         </button>
-        <a routerLink="/agente" class="btn btn-link">Cancelar</a>
+        <a id="linkBotonCancelarOperacion" routerLink="/agente" class="btn btn-link">Cancelar</a>
     </div>
 </form>

@@ -1,62 +1,54 @@
-import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-
-import { AgenteService } from './agente.service';
+import { AgenteTestDataBuilder } from './../model/agente.testdatabuilder';
 import { environment } from 'src/environments/environment';
-import { HttpService } from 'src/app/core/services/http.service';
-import { Agente } from '../model/agente';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { AgenteService } from './agente.service';
+import { TestBed } from '@angular/core/testing';
+import { HttpService } from '@core/services/http.service';
 import { HttpResponse } from '@angular/common/http';
+import { first } from 'rxjs/operators';
 
-describe('ProductoService', () => {
-  let httpMock: HttpTestingController;
+describe('AGENTE DE TRÁNSITO', () => {
   let service: AgenteService;
-  const apiEndpointProductoConsulta = `${environment.endpoint}/tiposFamilia`;
-  const apiEndpointProductos = `${environment.endpoint}/productos`;
+  let httpMock: HttpTestingController;
+  const apiEndopoint = `${environment.endpoint}/agentes`;
 
   beforeEach(() => {
     const injector = TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [AgenteService, HttpService]
+      providers: [{ provide: AgenteService, useClass: AgenteService }, HttpService]
     });
     httpMock = injector.inject(HttpTestingController);
     service = TestBed.inject(AgenteService);
   });
 
-  it('should be created', () => {
-    const productService: AgenteService = TestBed.inject(AgenteService);
-    expect(productService).toBeTruthy();
+  it('AGENTE {Deberia ser creada}', () => {
+    const horarioService: AgenteService = TestBed.inject(AgenteService);
+    expect(horarioService).toBeTruthy();
   });
 
-  it('deberia listar productos', () => {
-    const dummyProductos = [
-      new Agente('1', 'Producto 1', '', 1, 1), new Agente('2', 'Producto 2', '', 1, 1)
+  it('AGENTE {Deberia consultar GET}', () => {
+    const dummyAgentes = [
+      new AgenteTestDataBuilder('88', 'Agente 88', '123', 8, 15).build(),
+      new AgenteTestDataBuilder('99', 'Agente 99', '123', 9, 16).build()
     ];
-    service.consultar().subscribe(productos => {
-      expect(productos.length).toBe(2);
-      expect(productos).toEqual(dummyProductos);
+    service.consultar()
+    .pipe(first())
+    .subscribe((horarios) => {
+      expect(horarios.length).toBe(2);
+      expect(horarios).toEqual(dummyAgentes);
     });
-    const req = httpMock.expectOne(apiEndpointProductoConsulta);
+    const req = httpMock.expectOne(apiEndopoint);
     expect(req.request.method).toBe('GET');
-    req.flush(dummyProductos);
+    req.flush(dummyAgentes);
   });
 
-  it('deberia crear un producto', () => {
-    const dummyProducto = new Agente('1', 'Producto 1', '', 1, 1);
-    service.guardar(dummyProducto).subscribe((respuesta) => {
-      expect(respuesta).toEqual(true);
+  it('AGENTE {Deberia eliminar DELETE}', () => {
+    const dummyAgentePre = { id: '100', nombre: 'Agente 100', telefono: '60', horaInicioLabor: 8, horaFinLabor: 14 };
+    service.eliminar(dummyAgentePre.id).subscribe((respuesta) => {
+      expect(respuesta).toEqual(false);
     });
-    const req = httpMock.expectOne(apiEndpointProductos);
-    expect(req.request.method).toBe('POST');
-    req.event(new HttpResponse<boolean>({body: true}));
-  });
-
-  it('deberia eliminar un producto', () => {
-    const dummyProducto = new Agente('1', 'Producto 1', '', 1, 1);
-    service.eliminar(dummyProducto.id).subscribe((respuesta) => {
-      expect(respuesta).toEqual(true);
-    });
-    const req = httpMock.expectOne(`${apiEndpointProductos}/1`);
+    const req = httpMock.expectOne(`${apiEndopoint}/${dummyAgentePre.id}`);
     expect(req.request.method).toBe('DELETE');
-    req.event(new HttpResponse<boolean>({body: true}));
+    req.event(new HttpResponse<boolean>({ body: false }));
   });
 });
