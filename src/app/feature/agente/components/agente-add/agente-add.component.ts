@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
+import Swal from 'sweetalert2';
 
 import { AgenteService } from '../../shared/service/agente.service';
 
@@ -16,6 +17,11 @@ export class AgenteAddComponent implements OnInit {
   isAddMode!: boolean;
   loading = false;
   submitted = false;
+
+  notificacion = Swal.mixin({
+    toast: true,
+    position: 'center'
+  });
 
   constructor(
       private formBuilder: FormBuilder,
@@ -61,21 +67,38 @@ export class AgenteAddComponent implements OnInit {
       }
   }
 
-  private createAgente() {
+  public createAgente() {
       this.agenteService.guardar(this.form.value, 'nuevo')
           .pipe(first())
           .subscribe(() => {
+              this.success();
               this.router.navigate(['../'], { relativeTo: this.route });
-          })
+          }, error => this.mostrarError(error.error.mensaje))
           .add(() => this.loading = false);
   }
 
-  private updateAgente() {
+  public updateAgente() {
       this.agenteService.guardar(this.form.value, this.id)
           .pipe(first())
           .subscribe(() => {
               this.router.navigate(['../../'], { relativeTo: this.route });
           })
           .add(() => this.loading = false);
+  }
+
+  public success(){
+    this.notificacion.fire({
+      title: 'Éxito',
+      text: 'Se ha creado el agente',
+      icon: 'success'
+    });
+  }
+
+  public mostrarError(mensaje){
+    this.notificacion.fire({
+      title: 'Error',
+      text: mensaje,
+      icon: 'error'
+    });
   }
 }
