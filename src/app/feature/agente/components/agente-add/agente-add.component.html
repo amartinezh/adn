@@ -2,30 +2,53 @@
 <h2 *ngIf="!isAddMode">Modificar Agente</h2>
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="form-row">
-        <div class="form-group col-12">
-            <label>Id</label>
-            <input id="linkInputIdCrearAgente" type="text" formControlName="id" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.id.errors }" />
-            <div *ngIf="submitted && f.id.errors" class="invalid-feedback">
-                <div *ngIf="f.id.errors.required">El id es rquerido</div>
+        <div class="form-group row">
+            <div class="form-group col-4">
+                <label>Id</label>
+                <input id="linkInputIdCrearAgente" type="text" formControlName="id" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.id.errors }" />
+                <div *ngIf="submitted && f.id.errors" class="invalid-feedback">
+                    <div *ngIf="f.id.errors.required">El id es rquerido</div>
+                </div>
+            </div>
+            <div class="form-group col-6">
+                <label>Nombre</label>
+                <input id="linkInputNombreCrearAgente" type="text" formControlName="nombre" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.nombre.errors }" />
+                <div *ngIf="submitted && f.nombre.errors" class="invalid-feedback">
+                    <div *ngIf="f.nombre.errors.required">EL nombre es requerido</div>
+                </div>
             </div>
         </div>
-        <div class="form-group col-12">
-            <label>Nombre</label>
-            <input id="linkInputNombreCrearAgente" type="text" formControlName="nombre" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.descripcion.errors }" />
-            <div *ngIf="submitted && f.nombre.errors" class="invalid-feedback">
-                <div *ngIf="f.nombre.errors.required">EL nombre es requerido</div>
+        <div class="form-group row">
+            <div class="form-group col-6">
+                <label>Telefono</label>
+                <input type="text" formControlName="telefono" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.telefono.errors }" />
+                <div *ngIf="submitted && f.telefono.errors" class="invalid-feedback">
+                    <div *ngIf="f.telefono.errors.required">El teléfono es requerido</div>
+                </div>
             </div>
-        </div>
-        <div class="form-group col-5">
-            <label>Telefono</label>
-            <input type="text" formControlName="telefono" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.descripcion.errors }" />
-            <div *ngIf="submitted && f.telefono.errors" class="invalid-feedback">
-                <div *ngIf="f.telefono.errors.required">El teléfono es requerido</div>
+            <div class="form-group col-6">
+                <label>Hora inicio labores</label>
+                <input type="text" formControlName="horaInicioLabor" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.horaInicioLabor.errors }" />
+                <div *ngIf="submitted && f.horaInicioLabor.errors" class="invalid-feedback">
+                    <div *ngIf="f.horaInicioLabor.errors.required">La hora de inicio de labores es requerida</div>
+                </div>
+            </div>
+            <div class="form-group col-6">
+                <label>Hora terminación labor</label>
+                <input type="text" formControlName="horaFinLabor" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.horaFinLabor.errors }" />
+                <div *ngIf="submitted && f.horaFinLabor.errors" class="invalid-feedback">
+                    <div *ngIf="f.horaFinLabor.errors.required">La hora de terminación de labor es requerido</div>
+                </div>
             </div>
         </div>
     </div>
     <div class="form-group">
-        <button id = "linkBotonCrearAgente" [disabled]="loading" class="btn btn-primary">
+        <button id="linkBotonCrearAgente" [disabled]="loading" class="btn btn-primary">
             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
             Guardar
         </button>

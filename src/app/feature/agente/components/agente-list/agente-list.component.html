@@ -1,11 +1,14 @@
 <h1>Agentes</h1>
 <a id="linkAgregarAgente" routerLink="add" class="btn btn-sm btn-success mb-2">Agregar Agente</a>
 <table class="table table-striped">
+    <caption>Listado de todos los agentes registrados en el sistema</caption>
     <thead>
         <tr>
             <th style="width: 30%">id</th>
             <th style="width: 40%">Nombre</th>
             <th style="width: 40%">Telefono</th>
+            <th style="width: 40%">Inicio</th>
+            <th style="width: 40%">Fin</th>
             <th style="width: 30%">Acción</th>
         </tr>
     </thead>
@@ -14,6 +17,8 @@
             <td>{{item.id}}</td>
             <td>{{item.nombre}}</td>
             <td>{{item.telefono}}</td>
+            <td>{{item.horaInicioLabor}}</td>
+            <td>{{item.horaFinLabor}}</td>
             <td style="white-space: nowrap">
                 <a id="linkEditarAgente" routerLink="edit/{{item.id}}" class="btn btn-sm btn-primary mr-1">Editar</a>
                 <button id="linkEliminarAgente" (click)="eliminar(item.id)" class="btn btn-sm btn-danger btn-delete-user"

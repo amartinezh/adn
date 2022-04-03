@@ -6,6 +6,7 @@ import { TestBed } from '@angular/core/testing';
 import { HttpService } from '@core/services/http.service';
 import { HttpResponse } from '@angular/common/http';
 import { first } from 'rxjs/operators';
+import { Agente } from '../model/agente';
 
 describe('AGENTE DE TRÁNSITO', () => {
   let service: AgenteService;
@@ -40,6 +41,18 @@ describe('AGENTE DE TRÁNSITO', () => {
     const req = httpMock.expectOne(apiEndopoint);
     expect(req.request.method).toBe('GET');
     req.flush(dummyAgentes);
+  });
+
+  it('AGENTE {Deberia actualizar PUT}', () => {
+    const dummyPre = { id: '100', nombre: 'Agente 100', telefono: '60', horaInicioLabor: 8, horaFinLabor: 14 };
+    const dummyPos = { id: '200', nombre: 'Agente 200', telefono: '60', horaInicioLabor: 8, horaFinLabor: 14 };
+    service.guardar( dummyPos as Agente, dummyPre.id)
+      .subscribe((respuesta) => {
+        expect(respuesta).toEqual(false);
+      });
+    const req = httpMock.expectOne(`${apiEndopoint}/${dummyPre.id}`);
+    expect(req.request.method).toBe('PUT');
+    req.event(new HttpResponse<boolean>({ body: false }));
   });
 
   it('AGENTE {Deberia eliminar DELETE}', () => {

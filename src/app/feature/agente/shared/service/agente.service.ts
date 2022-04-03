@@ -22,7 +22,7 @@ export class AgenteService {
       return this.http.doPost<Agente, boolean>(`${environment.endpoint}/agentes`, agente);
     }
     else{
-      return this.http.doPost<Agente, boolean>(`${environment.endpoint}/agentes/${id}`, agente);
+      return this.http.doPut<Agente, boolean>(`${environment.endpoint}/agentes/${id}`, agente);
     }
   }
 

@@ -31,7 +31,9 @@ export class AgenteAddComponent implements OnInit {
       this.form = this.formBuilder.group({
           id: ['', Validators.required],
           nombre: ['', Validators.required],
-          telefono: ['', Validators.required]
+          telefono: ['', Validators.required],
+          horaInicioLabor: ['', Validators.required],
+          horaFinLabor: ['', Validators.required]
       }, formOptions);
       if (!this.isAddMode) {
           this.agenteService.consultarId(this.id)
