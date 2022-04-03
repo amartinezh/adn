@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-
 import { CategoriaService } from '../../shared/service/categoria.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-categoria-add',
@@ -16,6 +16,11 @@ export class CategoriaAddComponent implements OnInit {
   isAddMode!: boolean;
   loading = false;
   submitted = false;
+
+  notificacion = Swal.mixin({
+    toast: true,
+    position: 'center'
+  });
 
   constructor(
       private formBuilder: FormBuilder,
@@ -58,21 +63,38 @@ export class CategoriaAddComponent implements OnInit {
       }
   }
 
-  private createCategoria() {
+  public createCategoria() {
       this.categoriaService.guardar(this.form.value)
           .pipe(first())
           .subscribe(() => {
-              this.router.navigate(['../'], { relativeTo: this.route });
-          })
+            this.success();
+            this.router.navigate(['../'], { relativeTo: this.route });
+          }, error => this.mostrarError(error.error.mensaje))
           .add(() => this.loading = false);
   }
 
-  private updateCategoria() {
+  public updateCategoria() {
       this.categoriaService.guardar(this.form.value, this.id)
           .pipe(first())
           .subscribe(() => {
               this.router.navigate(['../../'], { relativeTo: this.route });
           })
           .add(() => this.loading = false);
+  }
+
+  public success(){
+    this.notificacion.fire({
+      title: 'Éxito',
+      text: 'Se ha creado la categoria',
+      icon: 'success'
+    });
+  }
+
+  public mostrarError(mensaje){
+    this.notificacion.fire({
+      title: 'Error',
+      text: mensaje,
+      icon: 'error'
+    });
   }
 }

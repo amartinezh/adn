@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
-import { AgenteService } from '../../shared/service/agente.service';
+import { AgenteSharedService } from '@shared/services/Agente/agente.shared.service';
 import { Agente } from '../../shared/model/agente';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-agente-list',
@@ -11,22 +12,42 @@ import { Agente } from '../../shared/model/agente';
 export class AgenteListComponent implements OnInit {
   agentes!: Agente[];
 
-  constructor(private agenteService: AgenteService) {}
+  notificacion = Swal.mixin({
+    toast: true,
+    position: 'center'
+  });
+
+  constructor(private agenteService: AgenteSharedService) {}
 
   ngOnInit() {
-      this.agenteService.consultar()
-          .pipe(first())
-          .subscribe((res) => {
-            this.agentes = res;
-          });
+      this.consultar();
   }
 
-  eliminar(id: string) {
+  public consultar(){
+    this.agenteService.consultar()
+    .pipe(first())
+    .subscribe((res) => {
+      this.agentes = res;
+    });
+  }
+
+  public success(){
+    this.notificacion.fire({
+      title: 'Éxito',
+      text: 'Se ha eliminado el agente de manera correcta',
+      icon: 'success'
+    });
+  }
+
+  public eliminar(id: string) {
       const cat = this.agentes.find(x => x.id === id);
       if (!cat){ return; }
       cat.isDeleting = true;
       this.agenteService.eliminar(id)
           .pipe(first())
-          .subscribe(() => this.agentes = this.agentes.filter(x => x.id !== id));
+          .subscribe(() => {
+            this.success();
+            this.agentes = this.agentes.filter(x => x.id !== id);
+          });
   }
 }
