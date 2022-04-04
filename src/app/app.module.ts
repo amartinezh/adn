@@ -10,8 +10,6 @@ import { CookieService } from 'ngx-cookie-service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { TranslationComponent } from './feature/translation/translation.component';
-import { InternacionalizacionComponent } from './feature/internacionalizacion/internacionalizacion.component';
 import { SharedModule } from '@shared/shared.module';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -22,8 +20,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     declarations: [
         AppComponent,
         HomeComponent
-        , TranslationComponent
-        , InternacionalizacionComponent
     ],
     imports: [
         BrowserModule,

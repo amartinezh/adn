@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SecurityGuard } from '@core/guard/security.guard';
 import { HomeComponent } from '@home/home.component';
-import { InternacionalizacionComponent } from './feature/internacionalizacion/internacionalizacion.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -17,8 +16,7 @@ const routes: Routes = [
     path: 'comparendo',
     loadChildren: () => import('@comparendo/comparendo.module').then(mod => mod.ComparendoModule),
     canActivate: [SecurityGuard]
-  },
-  { path: 'internacionalizacion', component: InternacionalizacionComponent, canActivate: [SecurityGuard] }
+  }
 ];
 
 @NgModule({
