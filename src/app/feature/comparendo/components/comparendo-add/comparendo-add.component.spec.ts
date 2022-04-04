@@ -1,5 +1,5 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { of, throwError } from 'rxjs';
+import { of } from 'rxjs';
 
 import { ComparendoAddComponent } from '@comparendo/components/comparendo-add/comparendo-add.component';
 import { ComparendoService } from '@comparendo/shared/service/comparendo.service';
@@ -15,12 +15,6 @@ describe('ComparendoAddComponent', () => {
     let fixture: ComponentFixture<ComparendoAddComponent>;
     let comparendoService: ComparendoService;
     let spyAgregar;
-    const testError = {
-      status: 404,
-      error: {
-          mensaje: 'Test 404 error'
-      }
-    };
 
     beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
@@ -53,13 +47,6 @@ describe('ComparendoAddComponent', () => {
 
     it('formulario es invalido cuando esta vacio', () => {
       expect(component.form.valid).toBeFalsy();
-    });
-
-    it('debería capturar el error in this.error', () => {
-      spyAgregar.and.returnValue(throwError(testError));
-      component.createComparendo();
-      expect(component.notificacion.isVisible()).toBeTruthy();
-      expect(component.notificacion.getTitle().textContent).toEqual('Éxito');
     });
 
     it('Registrando comparendo', () => {
