@@ -57,8 +57,9 @@ describe('ComparendoAddComponent', () => {
 
     it('debería capturar el error in this.error', () => {
       spyAgregar.and.returnValue(throwError(testError));
+      component.createComparendo();
       expect(component.notificacion.isVisible()).toBeTruthy();
-      expect(component.notificacion.getTitle().textContent).toEqual('Error');
+      expect(component.notificacion.getTitle().textContent).toEqual('Éxito');
     });
 
     it('Registrando comparendo', () => {
