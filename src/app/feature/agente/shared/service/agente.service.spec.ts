@@ -7,6 +7,7 @@ import { HttpService } from '@core/services/http.service';
 import { HttpResponse } from '@angular/common/http';
 import { first } from 'rxjs/operators';
 import { Agente } from '../model/agente';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('AGENTE DE TRÁNSITO', () => {
   let service: AgenteService;
@@ -16,7 +17,8 @@ describe('AGENTE DE TRÁNSITO', () => {
   beforeEach(() => {
     const injector = TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [{ provide: AgenteService, useClass: AgenteService }, HttpService]
+      providers: [{ provide: AgenteService, useClass: AgenteService }, HttpService],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     });
     httpMock = injector.inject(HttpTestingController);
     service = TestBed.inject(AgenteService);

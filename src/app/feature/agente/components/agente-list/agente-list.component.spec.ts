@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpService } from 'src/app/core/services/http.service';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('AgenteListComponent', () => {
   let component: AgenteListComponent;
@@ -23,7 +24,8 @@ describe('AgenteListComponent', () => {
         HttpClientModule,
         RouterTestingModule
       ],
-      providers: [AgenteSharedService, HttpService]
+      providers: [AgenteSharedService, HttpService],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
       .compileComponents();
   }));

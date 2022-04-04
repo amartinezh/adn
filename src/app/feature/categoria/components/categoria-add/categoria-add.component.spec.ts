@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpService } from 'src/app/core/services/http.service';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('CategoriaAddComponent', () => {
     let component: CategoriaAddComponent;
@@ -32,6 +33,7 @@ describe('CategoriaAddComponent', () => {
           FormsModule
         ],
         providers: [CategoriaService, HttpService],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA]
       })
       .compileComponents();
     }));

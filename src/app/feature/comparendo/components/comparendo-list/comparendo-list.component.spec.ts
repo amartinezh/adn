@@ -12,6 +12,7 @@ import { PosiblesInfractor } from '@shared/models/Comparendo/posibles_infractore
 import { Agente } from '@shared/models/Agente/agente';
 import { Categoria } from '@shared/models/Categoria/categoria';
 import { ComparendoService } from '@comparendo/shared/service/comparendo.service';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('ComparendoListComponent', () => {
   let component: ComparendoListComponent;
@@ -30,7 +31,8 @@ describe('ComparendoListComponent', () => {
         HttpClientModule,
         RouterTestingModule
       ],
-      providers: [ComparendoSharedService, ComparendoService , HttpService]
+      providers: [ComparendoSharedService, ComparendoService , HttpService],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
       .compileComponents();
   }));

@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpService } from 'src/app/core/services/http.service';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('AgenteAddComponent', () => {
     let component: AgenteAddComponent;
@@ -33,6 +33,7 @@ describe('AgenteAddComponent', () => {
           FormsModule
         ],
         providers: [AgenteService, HttpService],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA]
       })
       .compileComponents();
     }));

@@ -11,6 +11,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { SharedModule } from '@shared/shared.module';
+import { RouterModule } from '@angular/router';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
     return new TranslateHttpLoader(httpClient);
@@ -22,6 +23,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         HomeComponent
     ],
     imports: [
+        RouterModule,
         BrowserModule,
         AppRoutingModule,
         CoreModule,

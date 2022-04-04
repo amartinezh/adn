@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { ErrorCamposPlantillaComponent } from './error-campos-plantilla.component';
 
@@ -8,6 +9,7 @@ describe('ErrorCamposPlantillaComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
+      imports: [RouterTestingModule],
       declarations: [ ErrorCamposPlantillaComponent ]
     })
     .compileComponents();
