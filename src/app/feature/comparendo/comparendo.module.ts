@@ -7,6 +7,7 @@ import { ComparendoAddComponent } from './components/comparendo-add/comparendo-a
 import { LayoutComponent } from './components/layout/layout.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ComparendoService } from './shared/service/comparendo.service';
+import { PosiblesInfractorService } from './shared/service/posibles_infractores.service';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ComparendoService } from './shared/service/comparendo.service';
     ReactiveFormsModule
   ],
   providers: [
-    ComparendoService
+    ComparendoService,
+    PosiblesInfractorService
   ]
 })
 export class ComparendoModule { }

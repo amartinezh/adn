@@ -14,7 +14,7 @@ export class ComparendoService {
   }
 
   public consultarId(id: string) {
-    return this.http.doGet<Comparendo[]>(`${environment.endpoint}/comparendos/` + id, this.http.optsName('consultar comparendos'));
+    return this.http.doGet<Comparendo>(`${environment.endpoint}/comparendos/` + id, this.http.optsName('consultar comparendos'));
   }
 
   public guardar(comparendo: Comparendo, id?: string) {

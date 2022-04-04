@@ -8,6 +8,7 @@ import { Comparendo } from '../../shared/model/comparendo';
   templateUrl: './comparendo-list.component.html',
   styleUrls: ['./comparendo-list.component.css']
 })
+
 export class ComparendoListComponent implements OnInit {
   comparendos!: Comparendo[];
 

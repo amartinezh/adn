@@ -7,52 +7,58 @@
 </div>
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="form-row">
-        <div class="form-group col-5">
-            <label>First Name</label>
-            <input type="text" formControlName="id" class="form-control" 
-            [ngClass]="{ 'is-invalid': submitted && f.id.errors }" />
-            <div *ngIf="submitted && f.id.errors" class="invalid-feedback">
-                <div *ngIf="f.id.errors.required">First Name is required</div>
+        <div class="form-group row">
+            <div class="form-group col-2">
+                <label>Id</label>
+                <input type="text" formControlName="id" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.id.errors }" />
+                <div *ngIf="submitted && f.id.errors" class="invalid-feedback">
+                    <div *ngIf="f.id.errors.required">First Name is required</div>
+                </div>
+            </div>
+            <div class="form-group col-5">
+                <label>Posible infractor</label>
+                <select formControlName="posiblesInfractores"
+                    [ngClass]="{ 'is-invalid': submitted && f.posiblesInfractores.errors }"
+                    (ngModelChange)="onSelectPosibleInfractor($event)" class="form-select form-select-sm"
+                    aria-label=".form-select-sm example">
+                    <option *ngFor="let item of posiblesInfractores" [ngValue]="item">{{item.placa}}</option>
+                </select>
+                <div *ngIf="submitted && f.posiblesInfractores.errors" class="invalid-feedback">
+                    <div *ngIf="f.posiblesInfractores.errors.required">El posible infractor es requerido</div>
+                </div>
+            </div>
+            <div class="form-group col-5">
+                <label>Agente de tránsito</label>
+                <select formControlName="agentesId" [ngClass]="{ 'is-invalid': submitted && f.agentesId.errors }"
+                    (ngModelChange)="onSelectAgente($event)" class="form-select form-select-sm"
+                    aria-label=".form-select-sm example">
+                    <option *ngFor="let item of agentes" [ngValue]="item">{{item.id}}</option>
+                </select>
+                <div *ngIf="submitted && f.agentesId.errors" class="invalid-feedback">
+                    <div *ngIf="f.agentesId.errors.required">El agente de tránsito es requerido</div>
+                </div>
             </div>
         </div>
-        <div class="form-group col-12">
-            <label>Posible infractor</label>
-            <select formControlName="posibles_infractoresId"
-                [ngClass]="{ 'is-invalid': submitted && f.posibles_infractoresid.errors }"
-                (ngModelChange)="onSelectPosibleInfractor($event)" class="form-select form-select-sm" aria-label=".form-select-sm example">
-                <option *ngFor="let item of posiblesInfractores" [ngValue]="item">{{item.placa}}</option>
-            </select>
-            <div *ngIf="submitted && f.posibles_infractoresid.errors" class="invalid-feedback">
-                <div *ngIf="f.posibles_infractoresid.errors.required">El posible infractor es requerido</div>
+
+        <div class="form-group row">
+            <div class="form-group col-6">
+                <label>Categoria del vehículo</label>
+                <select formControlName="categoriasId" [ngClass]="{ 'is-invalid': submitted && f.categoriasId.errors }"
+                    class="form-select form-select-sm" aria-label=".form-select-sm example">
+                    <option *ngFor="let item of categorias" [ngValue]="item" [value]="item">{{item.descripcion}}</option>
+                </select>
+                <div *ngIf="submitted && f.categoriasId.errors" class="invalid-feedback">
+                    <div *ngIf="f.categoriasId.errors.required">La categoría del vehículo es requerida</div>
+                </div>
             </div>
-        </div>
-        <div class="form-group col-12">
-            <label>Agente de tránsito</label>
-            <select formControlName="agentesId" [ngClass]="{ 'is-invalid': submitted && f.agentesid.errors }"
-                (ngModelChange)="onSelectAgente($event)" class="form-select form-select-sm"
-                aria-label=".form-select-sm example">
-                <option *ngFor="let item of agentes" [ngValue]="item">{{item.id}}</option>
-            </select>
-            <div *ngIf="submitted && f.agentesid.errors" class="invalid-feedback">
-                <div *ngIf="f.agentesid.errors.required">El agente de tránsito es requerido</div>
-            </div>
-        </div>
-        <div class="form-group col-12">
-            <label>Categoria del vehículo</label>
-            <select formControlName="categoriasId" [ngClass]="{ 'is-invalid': submitted && f.categoriasid.errors }"
-                class="form-select form-select-sm" aria-label=".form-select-sm example">
-                <option *ngFor="let item of categorias" [ngValue]="item.id">{{item.descripcion}}</option>
-            </select>
-            <div *ngIf="submitted && f.categoriasid.errors" class="invalid-feedback">
-                <div *ngIf="f.categoriasid.errors.required">La categoría del vehículo es requerida</div>
-            </div>
-        </div>
-        <div class="form-group col-12">
-            <label>Valor a pagar</label>
-            <input type="text" formControlName="valor" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f.valor.errors }" />
-            <div *ngIf="submitted && f.valor.errors" class="invalid-feedback">
-                <div *ngIf="f.valor.errors.required">El valor a pagar es rquerido</div>
+            <div class="form-group col-6">
+                <label>Valor a pagar</label>
+                <input type="text" formControlName="valor" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.valor.errors }" />
+                <div *ngIf="submitted && f.valor.errors" class="invalid-feedback">
+                    <div *ngIf="f.valor.errors.required">Deberá seleccionar un posible infractor para generar el valor</div>
+                </div>
             </div>
         </div>
     </div>

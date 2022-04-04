@@ -5,7 +5,7 @@
     <thead>
         <tr>
             <th style="width: 30%">id</th>
-            <th style="width: 40%">Posibles Infractores</th>
+            <th style="width: 40%">Placa infractora</th>
             <th style="width: 40%">Agentes</th>
             <th style="width: 40%">Categorias</th>
             <th style="width: 40%">Fecha/Hora</th>
@@ -16,11 +16,11 @@
     <tbody>
         <tr *ngFor="let item of comparendos">
             <td>{{item.id}}</td>
-            <td>{{item.posibles_infractoresId}}</td>
-            <td>{{item.agentesId}}</td>
-            <td>{{item.categoriasId}}</td>
+            <td>{{item.posiblesInfractores.placa}}</td>
+            <td>{{item.agentesId.nombre}}</td>
+            <td>{{item.categoriasId.descripcion}}</td>
             <td>{{item.fecha}}</td>
-            <td></td>
+            <td>{{item.valor}}</td>
             <td style="white-space: nowrap">
                 <a routerLink="edit/{{item.id}}" class="btn btn-sm btn-primary mr-1">Editar</a>
                 <button (click)="eliminar(item.id)" class="btn btn-sm btn-danger btn-delete-user"

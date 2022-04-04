@@ -1,11 +1,11 @@
 export class PosiblesInfractor {
     id: string;
     placa: string;
-    pesoLeido: string;
-    pesoPermitido: string;
+    pesoLeido: number;
+    pesoPermitido: number;
     fechaLectura: Date;
 
-    constructor(id: string, placa: string, pesoLeido: string, pesoPermitido: string, fechaLectura: Date) {
+    constructor(id: string, placa: string, pesoLeido: number, pesoPermitido: number, fechaLectura: Date) {
         this.id = id;
         this.placa = placa;
         this.pesoLeido = pesoLeido;
