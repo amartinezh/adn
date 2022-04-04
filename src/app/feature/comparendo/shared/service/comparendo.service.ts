@@ -23,7 +23,7 @@ export class ComparendoService {
         this.http.optsName('crear comparendos'));
     }
     else{
-      return this.http.doPost<Comparendo, boolean>(`${environment.endpoint}/comparendos/${id}`, comparendo,
+      return this.http.doPut<Comparendo, boolean>(`${environment.endpoint}/comparendos/${id}`, comparendo,
       this.http.optsName('modificar comparendos'));
     }
   }

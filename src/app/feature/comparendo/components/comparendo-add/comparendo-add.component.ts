@@ -139,7 +139,7 @@ export class ComparendoAddComponent implements OnInit {
         }
     }
 
-    private createComparendo() {
+    public createComparendo() {
         this.comparendoService.guardar(this.form.value)
             .pipe(first())
             .subscribe(() => {
@@ -149,7 +149,7 @@ export class ComparendoAddComponent implements OnInit {
             .add(() => this.loading = false);
     }
 
-    private updateComparendo() {
+    public updateComparendo() {
         this.comparendoService.guardar(this.form.value, this.id)
             .pipe(first())
             .subscribe(() => {

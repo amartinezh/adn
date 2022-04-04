@@ -15,14 +15,18 @@ export class ComparendoListComponent implements OnInit {
   constructor(private comparendoService: ComparendoService) {}
 
   ngOnInit() {
-      this.comparendoService.consultar()
+      this.consultar();
+  }
+
+  public consultar(){
+    this.comparendoService.consultar()
           .pipe(first())
           .subscribe((res) => {
             this.comparendos = res;
           });
   }
 
-  eliminar(id: string) {
+  public eliminar(id: string) {
       const res = this.comparendos.find(x => x.id === id);
       if (!res){ return; }
       res.isDeleting = true;
