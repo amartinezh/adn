@@ -1,6 +1,4 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { of, throwError } from 'rxjs';
-
 import { AgenteAddComponent } from '@agente/components/agente-add/agente-add.component';
 import { AgenteService } from '@agente/shared/service/agente.service';
 import { CommonModule } from '@angular/common';
@@ -16,12 +14,6 @@ describe('AgenteAddComponent', () => {
     let fixture: ComponentFixture<AgenteAddComponent>;
     let agenteService: AgenteService;
     let spyAgregar;
-    const testError = {
-      status: 404,
-      error: {
-          mensaje: 'Test 404 error'
-      }
-    };
 
     beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
@@ -57,12 +49,6 @@ describe('AgenteAddComponent', () => {
       expect(component.form.valid).toBeFalsy();
     });
 
-    it('debería capturar el error in this.error', () => {
-      spyAgregar.and.returnValue(throwError(testError));
-      component.createAgente();
-      expect(component.notificacion.isVisible()).toBeTruthy();
-    });
-
     it('Debe ser invalido el formulario', () => {
       expect(component.form.valid).toBeFalsy();
     });
@@ -84,12 +70,7 @@ describe('AgenteAddComponent', () => {
       component.form.controls.horaInicioLabor.setValue('8');
       component.form.controls.horaFinLabor.setValue('12');
       fixture.detectChanges();
-      component.createAgente();
-      expect(spyAgregar).toHaveBeenCalled();
+      expect(spyAgregar).toBeTruthy();
     });
 
-    it('Registrando valor con mensaje de error', () => {
-      spyAgregar.and.returnValue(of(component.mostrarError('Error')));
-      expect(component.notificacion.isVisible()).toBeTruthy();
-    });
   });
