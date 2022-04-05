@@ -19,6 +19,7 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [ReactiveFormsModule, FormsModule],
   exports: [
     CommonModule,
+    ErrorCamposPlantillaComponent,
     MensajeErrorCamposDirective,
     MensajeErrorCamposContenedorDirective,
     MensajeErrorCamposSubmitDirective,
