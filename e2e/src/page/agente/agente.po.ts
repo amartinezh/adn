@@ -11,7 +11,7 @@ export class AgentePage {
     private linkBotonEliminarAgente = element(by.id('linkEliminarAgente'));
 
     // Elementos Crear Agente
-    private linkBotonCrearAgente = element(by.id('linkBotonCrearAgente'));
+    private linkBotonCrearAgente = element(by.id('linkAgregarAgente'));
     private linkBotonCancelarOperacion = element(by.id('linkBotonCancelarOperacion'));
     private linkInputIdCrearAgente = element(by.id('linkInputIdCrearAgente'));
     private linkInputNombreCrearAgente = element(by.id('linkInputNombreCrearAgente'));

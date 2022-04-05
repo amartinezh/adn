@@ -16,16 +16,31 @@ describe('Agente E2E', () => {
         pagAddAgente = new AgenteAddPage();
     });
 
-    it('Deberia eliminar agentes', () => {
+    it('Deberia navegar al CRUD agentes', () => {
         page.navigateTo();
         navBar.clickBotonAgente();
     });
 
-    it('Deberia estar desabilitado el boton de guardar', () => {
+    it('Deberia navegar hasta el componente para agregar un agente', () => {
+        page.navigateTo();
         navBar.clickBotonAgente();
         pagAgente.clickBotonCrearAgente();
-        expect(pagAddAgente.getBotonCancelarHabilitado()).toBeFalse();
     });
 
-    
+    it('Deberia estar habilitado el boton de cancelar al agregar un nuevo agente', () => {
+        page.navigateTo();
+        navBar.clickBotonAgente();
+        pagAgente.clickBotonCrearAgente();
+        expect(pagAddAgente.getBotonCancelarHabilitado()).toBeTruthy();
+    });
+
+    it('Deberia guardar un agente', () => {
+        page.navigateTo();
+        navBar.clickBotonAgente();
+        pagAgente.clickBotonCrearAgente();
+        pagAddAgente.ingresarIdCrearAgente('77');
+        pagAddAgente.ingresarNombreCrearAgente('Super Agente 77');
+        pagAddAgente.clickBotonGuardarAgente();
+        expect(pagAddAgente.getBotonCancelarHabilitado()).toBeTruthy();
+    });
 });

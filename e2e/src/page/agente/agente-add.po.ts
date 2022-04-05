@@ -3,15 +3,15 @@ import { by, element } from 'protractor';
 export class AgenteAddPage {
 
     // Elementos Crear Agente
-    private linkBotonCrearAgente = element(by.id('linkBotonCrearAgente'));
+    private linkBotonGuardarAgente = element(by.id('linkBotonGuardarAgente'));
     private linkBotonCancelarOperacion = element(by.id('linkBotonCancelarOperacion'));
     private linkInputIdCrearAgente = element(by.id('linkInputIdCrearAgente'));
     private linkInputNombreCrearAgente = element(by.id('linkInputNombreCrearAgente'));
 
     // Métodos
     // Metodos de accion para Crear Agente
-    async clickBotonCrearAgente() {
-        await this.linkBotonCrearAgente.click();
+    async clickBotonGuardarAgente() {
+        await this.linkBotonGuardarAgente.click();
     }
 
     async ingresarIdCrearAgente(IdAgente) {
@@ -27,6 +27,10 @@ export class AgenteAddPage {
     }
 
     async getBotonCancelarHabilitado() {
-        await this.linkBotonCancelarOperacion.isEnabled();
+        return this.linkBotonCancelarOperacion.isEnabled();
+    }
+
+    async getBotonGuardarHabilitado() {
+        await this.linkBotonGuardarAgente.isEnabled();
     }
 }
