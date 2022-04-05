@@ -14,16 +14,15 @@ export class AgenteService {
   }
 
   public consultarId(id: string) {
-    return this.http.doGet<Agente[]>(`${environment.endpoint}/agentes/` + id, this.http.optsName('consultar agentes'));
+    return this.http.doGet<Agente>(`${environment.endpoint}/agentes/` + id, this.http.optsName('consultar agentes'));
   }
 
-  public guardar(agente: Agente, id?: string) {
-    if (id === 'nuevo') {
+  public guardar(agente: Agente) {
       return this.http.doPost<Agente, boolean>(`${environment.endpoint}/agentes`, agente);
-    }
-    else{
+  }
+
+  public editar(agente: Agente, id: string) {
       return this.http.doPut<Agente, boolean>(`${environment.endpoint}/agentes/${id}`, agente);
-    }
   }
 
   public eliminar(id: string) {

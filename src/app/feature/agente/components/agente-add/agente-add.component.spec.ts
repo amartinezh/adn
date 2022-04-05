@@ -9,6 +9,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpService } from 'src/app/core/services/http.service';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { AgenteServiceMock } from '@agente/shared/service/agente.service.mock';
 
 describe('AgenteAddComponent', () => {
     let component: AgenteAddComponent;
@@ -32,7 +33,9 @@ describe('AgenteAddComponent', () => {
           ReactiveFormsModule,
           FormsModule
         ],
-        providers: [AgenteService, HttpService],
+        providers: [HttpService, {
+          provide: AgenteService, useClass: AgenteServiceMock
+        }],
         schemas: [CUSTOM_ELEMENTS_SCHEMA]
       })
       .compileComponents();
@@ -42,9 +45,7 @@ describe('AgenteAddComponent', () => {
       fixture = TestBed.createComponent(AgenteAddComponent);
       component = fixture.componentInstance;
       agenteService = TestBed.inject(AgenteService);
-      spyAgregar = spyOn(agenteService, 'guardar').and.returnValue(
-        of(true)
-      );
+      
       fixture.detectChanges();
     });
 
@@ -60,27 +61,35 @@ describe('AgenteAddComponent', () => {
       spyAgregar.and.returnValue(throwError(testError));
       component.createAgente();
       expect(component.notificacion.isVisible()).toBeTruthy();
-      expect(component.notificacion.getTitle().textContent).toEqual('Error');
     });
 
-    it('Registrando agente de transito', () => {
+    it('Debe ser invalido el formulario', () => {
       expect(component.form.valid).toBeFalsy();
+    });
+
+    it('Debe ser valido el formulario', () => {
       component.form.controls.id.setValue('090');
       component.form.controls.nombre.setValue('Super agente');
       component.form.controls.telefono.setValue('315 665778');
       component.form.controls.horaInicioLabor.setValue('8');
       component.form.controls.horaFinLabor.setValue('12');
       expect(component.form.valid).toBeTruthy();
-      expect(component.createAgente()).toBe();
-      fixture.detectChanges();
-      expect(component.notificacion.isVisible()).toBeTruthy();
-      expect(component.notificacion.getTitle().textContent).toEqual('Éxito');
-      component.notificacion.clickConfirm();
     });
 
-    it('Registrando abono con mensaje de error', () => {
+    it('Debe crear un agente de transito', () => {
+      spyAgregar = spyOn(agenteService, 'guardar').and.callThrough();
+      component.form.controls.id.setValue('090');
+      component.form.controls.nombre.setValue('Super agente');
+      component.form.controls.telefono.setValue('315 665778');
+      component.form.controls.horaInicioLabor.setValue('8');
+      component.form.controls.horaFinLabor.setValue('12');
+      fixture.detectChanges();
+      component.createAgente();
+      expect(spyAgregar).toHaveBeenCalled();
+    });
+
+    it('Registrando valor con mensaje de error', () => {
       spyAgregar.and.returnValue(of(component.mostrarError('Error')));
       expect(component.notificacion.isVisible()).toBeTruthy();
-      expect(component.notificacion.getTitle().textContent).toEqual('Error');
     });
   });

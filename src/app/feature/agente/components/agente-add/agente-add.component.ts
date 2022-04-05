@@ -68,7 +68,7 @@ export class AgenteAddComponent implements OnInit {
   }
 
   public createAgente() {
-      this.agenteService.guardar(this.form.value, 'nuevo')
+      this.agenteService.guardar(this.form.value)
           .pipe(first())
           .subscribe(() => {
               this.success();
@@ -78,7 +78,7 @@ export class AgenteAddComponent implements OnInit {
   }
 
   public updateAgente() {
-      this.agenteService.guardar(this.form.value, this.id)
+      this.agenteService.editar(this.form.value, this.id)
           .pipe(first())
           .subscribe(() => {
               this.router.navigate(['../../'], { relativeTo: this.route });

@@ -25,4 +25,8 @@ export class AgenteAddPage {
     async clickBotonCancelarOperacion() {
         await this.linkBotonCancelarOperacion.click();
     }
+
+    async getBotonCancelarHabilitado() {
+        await this.linkBotonCancelarOperacion.isEnabled();
+    }
 }

@@ -1,69 +1,79 @@
-import { AgenteTestDataBuilder } from './../model/agente.testdatabuilder';
-import { environment } from 'src/environments/environment';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AgenteService } from './agente.service';
 import { TestBed } from '@angular/core/testing';
 import { HttpService } from '@core/services/http.service';
-import { HttpResponse } from '@angular/common/http';
-import { first } from 'rxjs/operators';
 import { Agente } from '../model/agente';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { AgenteMock, AgenteMockArray } from '../model/agenteMock';
+import { of } from 'rxjs';
 
 describe('AGENTE DE TRÁNSITO', () => {
   let service: AgenteService;
-  let httpMock: HttpTestingController;
-  const apiEndopoint = `${environment.endpoint}/agentes`;
+  let http: HttpService;
 
   beforeEach(() => {
-    const injector = TestBed.configureTestingModule({
+    TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [{ provide: AgenteService, useClass: AgenteService }, HttpService],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     });
-    httpMock = injector.inject(HttpTestingController);
     service = TestBed.inject(AgenteService);
+    http = TestBed.inject(HttpService);
   });
 
   it('AGENTE {Deberia ser creada}', () => {
-    const horarioService: AgenteService = TestBed.inject(AgenteService);
-    expect(horarioService).toBeTruthy();
+    const agenteService: AgenteService = TestBed.inject(AgenteService);
+    expect(agenteService).toBeTruthy();
   });
 
-  it('AGENTE {Deberia consultar GET}', () => {
-    const dummyAgentes = [
-      new AgenteTestDataBuilder('88', 'Agente 88', '123', 8, 15).build(),
-      new AgenteTestDataBuilder('99', 'Agente 99', '123', 9, 16).build()
-    ];
-    service.consultar()
-    .pipe(first())
-    .subscribe((horarios) => {
-      expect(horarios.length).toBe(2);
-      expect(horarios).toEqual(dummyAgentes);
+  it('should return an Obsevable<boolean> on create', () => {
+    const spyDoPost = spyOn(http, 'doPost').and.returnValue(of(true));
+
+    service.guardar(AgenteMock).subscribe((res: boolean) => {
+      expect(res).toBeTruthy();
     });
-    const req = httpMock.expectOne(apiEndopoint);
-    expect(req.request.method).toBe('GET');
-    req.flush(dummyAgentes);
+
+    expect(spyDoPost).toHaveBeenCalled();
   });
 
-  it('AGENTE {Deberia actualizar PUT}', () => {
-    const dummyPre = { id: '100', nombre: 'Agente 100', telefono: '60', horaInicioLabor: 8, horaFinLabor: 14 };
-    const dummyPos = { id: '200', nombre: 'Agente 200', telefono: '60', horaInicioLabor: 8, horaFinLabor: 14 };
-    service.guardar( dummyPos as Agente, dummyPre.id)
-      .subscribe((respuesta) => {
-        expect(respuesta).toEqual(false);
-      });
-    const req = httpMock.expectOne(`${apiEndopoint}/${dummyPre.id}`);
-    expect(req.request.method).toBe('PUT');
-    req.event(new HttpResponse<boolean>({ body: false }));
-  });
+  it('should return an Obsevable<Agente>', () => {
+    const spyDoGet = spyOn(http, 'doGet').and.returnValue(of(AgenteMock));
 
-  it('AGENTE {Deberia eliminar DELETE}', () => {
-    const dummyAgentePre = { id: '100', nombre: 'Agente 100', telefono: '60', horaInicioLabor: 8, horaFinLabor: 14 };
-    service.eliminar(dummyAgentePre.id).subscribe((respuesta) => {
-      expect(respuesta).toEqual(false);
+    service.consultarId('1').subscribe((res: Agente) => {
+      expect(res).toEqual(AgenteMock);
     });
-    const req = httpMock.expectOne(`${apiEndopoint}/${dummyAgentePre.id}`);
-    expect(req.request.method).toBe('DELETE');
-    req.event(new HttpResponse<boolean>({ body: false }));
+
+    expect(spyDoGet).toHaveBeenCalled();
   });
+
+  it('should return an Obsevable<Agente[]>', () => {
+    const spyDoGet = spyOn(http, 'doGet').and.returnValue(of(AgenteMockArray));
+
+    service.consultar().subscribe((res: Agente[]) => {
+      expect(res).toEqual(AgenteMockArray);
+    });
+
+    expect(spyDoGet).toHaveBeenCalled();
+  });
+
+  it('should return an Obsevable<boolean>', () => {
+    const spyDoDelete = spyOn(http, 'doDelete').and.returnValue(of(true));
+
+    service.eliminar('1').subscribe((res: boolean) => {
+      expect(res).toBeTrue();
+    });
+
+    expect(spyDoDelete).toHaveBeenCalled();
+  });
+
+  it('should return an Obsevable<boolean>', () => {
+    const spyDoPut = spyOn(http, 'doPut').and.returnValue(of(true));
+
+    service.editar(AgenteMock, '1').subscribe((res: boolean) => {
+      expect(res).toBeTrue();
+    });
+
+    expect(spyDoPut).toHaveBeenCalled();
+  });
+
 });
