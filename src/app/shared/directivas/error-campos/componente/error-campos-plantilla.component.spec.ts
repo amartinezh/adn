@@ -10,7 +10,7 @@ describe('ErrorCamposPlantillaComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule ,RouterTestingModule],
+      imports: [HttpClientTestingModule, RouterTestingModule],
       declarations: [ ErrorCamposPlantillaComponent ]
     })
     .compileComponents();

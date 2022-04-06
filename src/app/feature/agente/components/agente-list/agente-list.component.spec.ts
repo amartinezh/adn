@@ -5,12 +5,12 @@ import { AgenteListComponent } from './agente-list.component';
 import { AgenteServiceMock } from '@agente/shared/service/agente.service.mock';
 import { Agente } from '@shared/models/Agente/agente';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpService } from 'src/app/core/services/http.service';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AgenteService } from '@agente/shared/service/agente.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('AgenteListComponent', () => {
   let component: AgenteListComponent;
@@ -23,7 +23,7 @@ describe('AgenteListComponent', () => {
       declarations: [ AgenteListComponent ],
       imports: [
         CommonModule,
-        HttpClientModule,
+        HttpClientTestingModule,
         RouterTestingModule,
         ReactiveFormsModule,
         FormsModule

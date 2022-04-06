@@ -42,10 +42,14 @@ export class AgenteAddComponent implements OnInit {
           horaFinLabor: ['', Validators.required]
       }, formOptions);
       if (!this.isAddMode) {
-          this.agenteService.consultarId(this.id)
-              .pipe(first())
-              .subscribe(x => this.form.patchValue(x));
+         this.consultarId(this.id);
       }
+  }
+
+  public consultarId(id){
+    this.agenteService.consultarId(id)
+    .pipe(first())
+    .subscribe(x => this.form.patchValue(x));
   }
 
   // convenience getter for easy access to form fields
