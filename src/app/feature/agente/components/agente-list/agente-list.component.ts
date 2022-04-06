@@ -20,10 +20,10 @@ export class AgenteListComponent implements OnInit {
   constructor(private agenteService: AgenteSharedService) {}
 
   ngOnInit() {
-      this.consultar();
+      this.getInformacion();
   }
 
-  public consultar(){
+  public getInformacion(){
     this.agenteService.consultar()
     .pipe(first())
     .subscribe((res) => {
@@ -46,6 +46,7 @@ export class AgenteListComponent implements OnInit {
       this.agenteService.eliminar(id)
           .pipe(first())
           .subscribe(() => {
+            
             this.success();
             this.agentes = this.agentes.filter(x => x.id !== id);
           });
