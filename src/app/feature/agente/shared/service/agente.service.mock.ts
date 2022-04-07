@@ -22,6 +22,7 @@ export class AgenteServiceMock {
     if (agente) {
       return of(true);
     }
+    return true;
   }
 
   public editar(agente?: Agente, id?: string) {
@@ -29,6 +30,7 @@ export class AgenteServiceMock {
     if (agenteId || agente) {
       return of(true);
     }
+    return true;
   }
 
   public eliminar(id: string) {
@@ -36,5 +38,6 @@ export class AgenteServiceMock {
     if (agenteId) {
       return of(true);
     }
+    return true;
   }
 }
