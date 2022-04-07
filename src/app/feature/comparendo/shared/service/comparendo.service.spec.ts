@@ -1,5 +1,5 @@
 import { of } from 'rxjs';
-import { Comparendo } from '../model/comparendo';
+import { Comparendo } from '@shared/models/Comparendo/comparendo';
 import { ComparendoMock, ComparendoMockArray } from '../model/comparendoMock';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';

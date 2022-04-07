@@ -1,4 +1,4 @@
-import { Comparendo } from './comparendo';
+import { Comparendo } from '@shared/models/Comparendo/comparendo';
 import { PosiblesInfractor } from './posibles_infractores';
 import { Agente } from '@shared/models/Agente/agente';
 import { Categoria } from '@shared/models/Categoria/categoria';
