@@ -29,7 +29,6 @@ export class ComparendoAddComponent implements OnInit {
     agentes!: Agente[];
     categorias!: Categoria[];
     posiblesInfractores!: PosiblesInfractor[];
-    TARIFA_BASE_COBRO = 1500000;
 
     notificacion = Swal.mixin({
         toast: true,
@@ -118,10 +117,11 @@ export class ComparendoAddComponent implements OnInit {
     }
 
     onSelectAgente(item) {
+        const index = 3;
         const objectKeys = Object.values(item);
         const hora = new Date();
-        const horaInicioLabor = objectKeys[3];
-        const horaFinLabor = objectKeys[4];
+        const horaInicioLabor = objectKeys[index];
+        const horaFinLabor = objectKeys[index + 1];
         if (hora.getHours() >= horaInicioLabor && hora.getHours() < horaFinLabor) {
             this.isAgenteValido = false;
             this.loading = false;
@@ -133,14 +133,13 @@ export class ComparendoAddComponent implements OnInit {
     }
 
     public generarValor(posiblesInfractor: PosiblesInfractor) {
-        const pesoLeido = posiblesInfractor.pesoLeido;
-        const pesoPermitido = posiblesInfractor.pesoPermitido;
-        const diferencia = pesoPermitido - pesoLeido;
+        const diferencia = posiblesInfractor.pesoPermitido - posiblesInfractor.pesoLeido;
+        const TARIFA_BASE_COBRO = 1500000;
         if (diferencia > 4) {
-            return this.TARIFA_BASE_COBRO;
+            return TARIFA_BASE_COBRO;
         }
         else {
-            return this.TARIFA_BASE_COBRO - 500000;
+            return TARIFA_BASE_COBRO - 500000;
         }
     }
 

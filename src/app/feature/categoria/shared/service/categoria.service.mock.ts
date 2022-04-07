@@ -18,12 +18,14 @@ export class CategoriaServiceMock {
     if (agenteId) {
       return of(CategoriaMock);
     }
+    return true;
   }
 
   public guardar(agente: Categoria) {
     if (agente) {
       return of(true);
     }
+    return true;
   }
 
   public editar(agente?: Categoria, id?: string) {
@@ -31,6 +33,7 @@ export class CategoriaServiceMock {
     if (agenteId || agente) {
       return of(true);
     }
+    return true;
   }
 
   public eliminar(id: string) {
@@ -38,5 +41,6 @@ export class CategoriaServiceMock {
     if (CategoriaId) {
       return of(true);
     }
+    return true;
   }
 }

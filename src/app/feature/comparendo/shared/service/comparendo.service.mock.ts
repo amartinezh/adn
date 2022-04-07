@@ -18,12 +18,14 @@ export class ComparendoServiceMock {
     if (comparendoId) {
       return of(ComparendoMock);
     }
+    return true;
   }
 
   public guardar(comparendo: Comparendo) {
     if (comparendo) {
       return of(true);
     }
+    return true;
   }
 
   public editar(agente?: Comparendo, id?: string) {
@@ -31,6 +33,7 @@ export class ComparendoServiceMock {
     if (comparendoId || agente) {
       return of(true);
     }
+    return true;
   }
 
   public eliminar(id: string) {
@@ -38,5 +41,6 @@ export class ComparendoServiceMock {
     if (comparendoId) {
       return of(true);
     }
+    return true;
   }
 }
