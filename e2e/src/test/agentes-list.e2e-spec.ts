@@ -40,7 +40,11 @@ describe('Agente E2E', () => {
         pagAgente.clickBotonCrearAgente();
         pagAddAgente.ingresarIdCrearAgente('77');
         pagAddAgente.ingresarNombreCrearAgente('Super Agente 77');
+        pagAddAgente.ingresarTelefonoCrearAgente('3128512354');
+        pagAddAgente.ingresarHoraInicioCrearAgente(8);
+        pagAddAgente.ingresarHoraFinCrearAgente(20);
         pagAddAgente.clickBotonGuardarAgente();
-        expect(pagAddAgente.getBotonCancelarHabilitado()).toBeTruthy();
+        const res = pagAddAgente.getlinkMensaje();
+        expect(res).toBeUndefined();
     });
 });

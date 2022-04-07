@@ -4,24 +4,24 @@
     <div class="form-row">
         <div class="form-group col-5">
             <label>Id</label>
-            <input type="text" formControlName="id" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.id.errors }" />
+            <input id="linkInputIdCrearCategoria" type="text" formControlName="id" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.id.errors }" />
             <div *ngIf="submitted && f.id.errors" class="invalid-feedback">
-                <div *ngIf="f.id.errors.required">Id is required</div>
+                <div *ngIf="f.id.errors.required">Id es necesaria</div>
             </div>
         </div>
         <div class="form-group col-5">
             <label>Descripcion</label>
-            <input type="text" formControlName="descripcion" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.descripcion.errors }" />
+            <input id="linkInputDescripcionCrearCategoria" type="text" formControlName="descripcion" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.descripcion.errors }" />
             <div *ngIf="submitted && f.descripcion.errors" class="invalid-feedback">
-                <div *ngIf="f.descripcion.errors.required">Descripcion is required</div>
+                <div *ngIf="f.descripcion.errors.required">Descripcion es necesaria</div>
             </div>
         </div>
     </div>
     <div class="form-group">
-        <button id="guardar" [disabled]="loading" class="btn btn-primary">
+        <button id="linkBotonGuardarCategoria" [disabled]="loading" class="btn btn-primary">
             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
             Guardar
         </button>
-        <a routerLink="/categoria" class="btn btn-link">Cancelar</a>
+        <a id="linkBotonCancelarOperacion" routerLink="/categoria" class="btn btn-link">Cancelar</a>
     </div>
 </form>

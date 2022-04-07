@@ -23,7 +23,7 @@
         <div class="form-group row">
             <div class="form-group col-6">
                 <label>Telefono</label>
-                <input type="text" formControlName="telefono" class="form-control"
+                <input id="linkInputTelefonoCrearAgente" type="text" formControlName="telefono" class="form-control"
                     [ngClass]="{ 'is-invalid': submitted && f.telefono.errors }" />
                 <div *ngIf="submitted && f.telefono.errors" class="invalid-feedback">
                     <div *ngIf="f.telefono.errors.required">El teléfono es requerido</div>
@@ -31,7 +31,7 @@
             </div>
             <div class="form-group col-6">
                 <label>Hora inicio labores</label>
-                <input type="text" formControlName="horaInicioLabor" class="form-control"
+                <input id="linkInputHoraInicioCrearAgente" type="text" formControlName="horaInicioLabor" class="form-control"
                     [ngClass]="{ 'is-invalid': submitted && f.horaInicioLabor.errors }" />
                 <div *ngIf="submitted && f.horaInicioLabor.errors" class="invalid-feedback">
                     <div *ngIf="f.horaInicioLabor.errors.required">La hora de inicio de labores es requerida</div>
@@ -39,7 +39,7 @@
             </div>
             <div class="form-group col-6">
                 <label>Hora terminación labor</label>
-                <input type="text" formControlName="horaFinLabor" class="form-control"
+                <input id="linkInputHoraFinCrearAgente" type="text" formControlName="horaFinLabor" class="form-control"
                     [ngClass]="{ 'is-invalid': submitted && f.horaFinLabor.errors }" />
                 <div *ngIf="submitted && f.horaFinLabor.errors" class="invalid-feedback">
                     <div *ngIf="f.horaFinLabor.errors.required">La hora de terminación de labor es requerido</div>

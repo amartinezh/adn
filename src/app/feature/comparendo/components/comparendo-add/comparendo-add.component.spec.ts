@@ -206,11 +206,6 @@ describe('ComparendoAddComponent', () => {
   });
 
   it('Debe validar la ejecución del submit con formulario NO valido para modificar', () => {
-    component.form.controls.id.setValue(undefined);
-    component.form.controls.posiblesInfractores.setValue(undefined);
-    component.form.controls.agentesId.setValue(undefined);
-    component.form.controls.categoriasId.setValue(undefined);
-    component.form.controls.valor.setValue(undefined);
     component.form.clearAsyncValidators();
     component.form.clearValidators();
     component.form.updateValueAndValidity();
@@ -224,11 +219,6 @@ describe('ComparendoAddComponent', () => {
 
   it('Debe sacar error en crear agente', () => {
     spyGuardar = spyOn(comparendoService, 'guardar').and.callThrough();
-    component.form.controls.id.setValue(null);
-    component.form.controls.posiblesInfractores.setValue(null);
-    component.form.controls.agentesId.setValue(null);
-    component.form.controls.categoriasId.setValue(null);
-    component.form.controls.valor.setValue(null);
 
     component.createComparendo();
 
