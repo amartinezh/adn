@@ -23,66 +23,70 @@ export class CategoriaAddComponent implements OnInit {
   });
 
   constructor(
-      private formBuilder: FormBuilder,
-      private route: ActivatedRoute,
-      private router: Router,
-      private categoriaService: CategoriaService
-  ) {}
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private categoriaService: CategoriaService
+  ) { }
 
   ngOnInit() {
-      this.id = this.route.snapshot.params.id;
-      this.isAddMode = !this.id;
-      const formOptions: AbstractControlOptions = {  };
-      this.form = this.formBuilder.group({
-          id: ['', Validators.required],
-          descripcion: ['', Validators.required],
-      }, formOptions);
-      if (!this.isAddMode) {
-          this.categoriaService.consultarId(this.id)
-              .pipe(first())
-              .subscribe(x => this.form.patchValue(x));
-      }
+    this.id = this.route.snapshot.params.id;
+    this.isAddMode = !this.id;
+    const formOptions: AbstractControlOptions = {};
+    this.form = this.formBuilder.group({
+      id: ['', Validators.required],
+      descripcion: ['', Validators.required],
+    }, formOptions);
+    if (!this.isAddMode) {
+      this.consultarId(this.id);
+    }
+  }
+
+  public consultarId(id) {
+    this.categoriaService.consultarId(id)
+      .pipe(first())
+      .subscribe(x => this.form.patchValue(x));
   }
 
   // convenience getter for easy access to form fields
   get f() { return this.form.controls; }
 
   onSubmit() {
-      this.submitted = true;
+    this.submitted = true;
 
-      // stop here if form is invalid
-      if (this.form.invalid) {
-          return;
-      }
+    // stop here if form is invalid
+    if (this.form.invalid) {
+      return;
+    }
 
-      this.loading = true;
-      if (this.isAddMode) {
-          this.createCategoria();
-      } else {
-          this.updateCategoria();
-      }
+    this.loading = true;
+    if (this.isAddMode) {
+      this.createCategoria();
+    } else {
+      this.updateCategoria();
+    }
   }
 
   public createCategoria() {
-      this.categoriaService.guardar(this.form.value)
-          .pipe(first())
-          .subscribe(() => {
-            this.success();
-            this.router.navigate(['../'], { relativeTo: this.route });
-          }, error => this.mostrarError(error.error.mensaje))
-          .add(() => this.loading = false);
+    this.categoriaService.guardar(this.form.value)
+      .pipe(first())
+      .subscribe(() => {
+        this.success();
+        this.router.navigate(['../'], { relativeTo: this.route });
+      }, error => this.mostrarError(error.error.mensaje))
+      .add(() => this.loading = false);
   }
 
   public updateCategoria() {
-      this.categoriaService.guardar(this.form.value, this.id)
-          .pipe(first())
-          .subscribe(() => {
-              this.router.navigate(['../../'], { relativeTo: this.route });
-          })
-          .add(() => this.loading = false);
+    this.categoriaService.guardar(this.form.value)
+      .pipe(first())
+      .subscribe(() => {
+        this.router.navigate(['../../'], { relativeTo: this.route });
+      })
+      .add(() => this.loading = false);
   }
 
-  public success(){
+  public success() {
     this.notificacion.fire({
       title: 'Éxito',
       text: 'Se ha creado la categoria',
@@ -90,7 +94,7 @@ export class CategoriaAddComponent implements OnInit {
     });
   }
 
-  public mostrarError(mensaje){
+  public mostrarError(mensaje) {
     this.notificacion.fire({
       title: 'Error',
       text: mensaje,

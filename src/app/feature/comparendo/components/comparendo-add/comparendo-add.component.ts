@@ -51,12 +51,16 @@ export class ComparendoAddComponent implements OnInit {
         this.isAddMode = !this.id;
         this.initForm();
         if (!this.isAddMode) {
-            this.comparendoService.consultarId(this.id)
-                .pipe(first())
-                .subscribe((x: Comparendo) => {
-                    this.initForm(x);
-                });
+            this.consultarId(this.id);
         }
+    }
+
+    public consultarId(id) {
+        this.comparendoService.consultarId(id)
+            .pipe(first())
+            .subscribe((x: Comparendo) => {
+                this.initForm(x);
+            });
     }
 
     public initForm(x?) {
@@ -150,7 +154,7 @@ export class ComparendoAddComponent implements OnInit {
     }
 
     public updateComparendo() {
-        this.comparendoService.guardar(this.form.value, this.id)
+        this.comparendoService.editar(this.form.value, this.id)
             .pipe(first())
             .subscribe(() => {
                 this.success('El comparendo se ha modificado correctamente');

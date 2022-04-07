@@ -46,7 +46,6 @@ export class AgenteListComponent implements OnInit {
       this.agenteService.eliminar(id)
           .pipe(first())
           .subscribe(() => {
-            
             this.success();
             this.agentes = this.agentes.filter(x => x.id !== id);
           });

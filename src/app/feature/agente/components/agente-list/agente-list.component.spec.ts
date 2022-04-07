@@ -16,10 +16,13 @@ describe('AgenteListComponent', () => {
   let component: AgenteListComponent;
   let fixture: ComponentFixture<AgenteListComponent>;
   let agenteService: AgenteService;
-  const listaAgentes: Agente[] = [new Agente('86', 'Super Agente 86', '312334554', 8, 12), new Agente('87', 'Agente 87', '312334554', 14, 22)];
-const AgenteMockArray = [new Agente('1', 'Juan', '123', 1, 1),
-                                new Agente('2', 'Pablo', '123', 1, 1),
-                                new Agente('3', 'Maria', '123', 1, 1)];
+  const listaAgentes: Agente[] = [new Agente('86', 'Super Agente 86', '312334554', 8, 12),
+  new Agente('87', 'Agente 87', '312334554', 14, 22)];
+
+  const AgenteMockArray = [new Agente('1', 'Juan', '123', 1, 1),
+  new Agente('2', 'Pablo', '123', 1, 1),
+  new Agente('3', 'Maria', '123', 1, 1)];
+
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [AgenteListComponent],

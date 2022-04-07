@@ -14,19 +14,16 @@ export class CategoriaService {
   }
 
   public consultarId(id: string) {
-    return this.http.doGet<Categoria[]>(`${environment.endpoint}/categorias/` + id, this.http.optsName('consultar categorias'));
+    return this.http.doGet<Categoria>(`${environment.endpoint}/categorias/` + id, this.http.optsName('consultar categorias'));
   }
 
-  public guardar(categoria: Categoria, id?: string) {
-    if (id === undefined) {
-      return this.http.doPost<Categoria, boolean>(`${environment.endpoint}/categorias`, categoria,
-        this.http.optsName('crear categorias'));
-    }
-    else{
-      return this.http.doPost<Categoria, boolean>(`${environment.endpoint}/categorias/${id}`, categoria,
-      this.http.optsName('modificar categorias'));
-    }
-  }
+  public guardar(agente: Categoria) {
+    return this.http.doPost<Categoria, boolean>(`${environment.endpoint}/categorias`, agente);
+}
+
+public editar(agente: Categoria, id: string) {
+    return this.http.doPut<Categoria, boolean>(`${environment.endpoint}/categorias/${id}`, agente);
+}
 
   public eliminar(id: string) {
     return this.http.doDelete<boolean>(`${environment.endpoint}/categorias/${id}`,

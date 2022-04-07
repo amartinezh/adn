@@ -17,15 +17,12 @@ export class ComparendoService {
     return this.http.doGet<Comparendo>(`${environment.endpoint}/comparendos/` + id, this.http.optsName('consultar comparendos'));
   }
 
-  public guardar(comparendo: Comparendo, id?: string) {
-    if (id === undefined) {
-      return this.http.doPost<Comparendo, boolean>(`${environment.endpoint}/comparendos`, comparendo,
-        this.http.optsName('crear comparendos'));
-    }
-    else{
-      return this.http.doPut<Comparendo, boolean>(`${environment.endpoint}/comparendos/${id}`, comparendo,
-      this.http.optsName('modificar comparendos'));
-    }
+  public guardar(agente: Comparendo) {
+    return this.http.doPost<Comparendo, boolean>(`${environment.endpoint}/comparendos`, agente);
+  }
+
+  public editar(agente: Comparendo, id: string) {
+    return this.http.doPut<Comparendo, boolean>(`${environment.endpoint}/comparendos/${id}`, agente);
   }
 
   public eliminar(id: string) {
