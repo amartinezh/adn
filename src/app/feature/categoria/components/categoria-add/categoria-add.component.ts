@@ -30,6 +30,10 @@ export class CategoriaAddComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.inicializadora();
+  }
+
+  public inicializadora() {
     this.id = this.route.snapshot.params.id;
     this.isAddMode = !this.id;
     const formOptions: AbstractControlOptions = {};
@@ -40,12 +44,6 @@ export class CategoriaAddComponent implements OnInit {
     if (!this.isAddMode) {
       this.consultarId(this.id);
     }
-  }
-
-  public consultarId(id) {
-    this.categoriaService.consultarId(id)
-      .pipe(first())
-      .subscribe(x => this.form.patchValue(x));
   }
 
   // convenience getter for easy access to form fields
@@ -67,14 +65,18 @@ export class CategoriaAddComponent implements OnInit {
     }
   }
 
-  public createCategoria() {
-    this.categoriaService.guardar(this.form.value)
+  public success() {
+    this.notificacion.fire({
+      title: 'Éxito',
+      text: 'Se ha creado la categoria',
+      icon: 'success'
+    });
+  }
+
+  public consultarId(id) {
+    this.categoriaService.consultarId(id)
       .pipe(first())
-      .subscribe(() => {
-        this.success();
-        this.router.navigate(['../'], { relativeTo: this.route });
-      }, error => this.mostrarError(error.error.mensaje))
-      .add(() => this.loading = false);
+      .subscribe(x => this.form.patchValue(x));
   }
 
   public updateCategoria() {
@@ -86,12 +88,14 @@ export class CategoriaAddComponent implements OnInit {
       .add(() => this.loading = false);
   }
 
-  public success() {
-    this.notificacion.fire({
-      title: 'Éxito',
-      text: 'Se ha creado la categoria',
-      icon: 'success'
-    });
+  public createCategoria() {
+    this.categoriaService.guardar(this.form.value)
+      .pipe(first())
+      .subscribe(() => {
+        this.success();
+        this.router.navigate(['../'], { relativeTo: this.route });
+      }, error => this.mostrarError(error.error.mensaje))
+      .add(() => this.loading = false);
   }
 
   public mostrarError(mensaje) {
@@ -101,4 +105,8 @@ export class CategoriaAddComponent implements OnInit {
       icon: 'error'
     });
   }
+
+
+
+
 }

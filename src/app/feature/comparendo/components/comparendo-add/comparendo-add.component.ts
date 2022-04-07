@@ -132,8 +132,8 @@ export class ComparendoAddComponent implements OnInit {
     }
 
     public generarValor(posiblesInfractor: PosiblesInfractor) {
-        const pesoLeido: number = posiblesInfractor.pesoLeido;
-        const pesoPermitido: number = posiblesInfractor.pesoPermitido;
+        const pesoLeido = posiblesInfractor.pesoLeido;
+        const pesoPermitido = posiblesInfractor.pesoPermitido;
         const diferencia = pesoPermitido - pesoLeido;
         if (diferencia > 4) {
             return 150000;
