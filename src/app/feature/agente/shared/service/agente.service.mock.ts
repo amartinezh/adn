@@ -13,11 +13,9 @@ export class AgenteServiceMock {
     return of(AgenteMockArray);
   }
 
-  public consultarId(id: string) {
-    const agenteId = id;
-    if (agenteId) {
+  public consultarId(id?: string) {
+      id = ( (id === '1') ? '1' : '0');
       return of(AgenteMock);
-    }
   }
 
   public guardar(agente: Agente) {

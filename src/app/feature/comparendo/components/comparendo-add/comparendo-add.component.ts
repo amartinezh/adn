@@ -29,6 +29,7 @@ export class ComparendoAddComponent implements OnInit {
     agentes!: Agente[];
     categorias!: Categoria[];
     posiblesInfractores!: PosiblesInfractor[];
+    TARIFA_BASE_COBRO = 1500000;
 
     notificacion = Swal.mixin({
         toast: true,
@@ -136,10 +137,10 @@ export class ComparendoAddComponent implements OnInit {
         const pesoPermitido = posiblesInfractor.pesoPermitido;
         const diferencia = pesoPermitido - pesoLeido;
         if (diferencia > 4) {
-            return 150000;
+            return this.TARIFA_BASE_COBRO;
         }
         else {
-            return 100000;
+            return this.TARIFA_BASE_COBRO - 500000;
         }
     }
 
