@@ -1,5 +1,5 @@
 <h1>Administración de Comparendos</h1>
-<a routerLink="add" class="btn btn-sm btn-success mb-2">Registrar Comparendo</a>
+<a id = "linkAgregarComparendo" routerLink="add" class="btn btn-sm btn-success mb-2">Registrar Comparendo</a>
 <table class="table table-striped">
     <caption>Listado de todos los comparendos registrados en el sistema</caption>
     <thead>
@@ -22,7 +22,11 @@
             <td>{{item.fecha}}</td>
             <td>{{item.valor}}</td>
             <td style="white-space: nowrap">
-                <a routerLink="edit/{{item.id}}" class="btn btn-sm btn-primary mr-1">Editar</a>
+                <button (click)="editar(item.id)" class="btn btn-sm btn-primary btn-delete-user"
+                    [disabled]="item.isDeleting">
+                    <span *ngIf="item.isDeleting" class="spinner-border spinner-border-sm"></span>
+                    <span *ngIf="!item.isDeleting">Editar</span>
+                </button>
                 <button (click)="eliminar(item.id)" class="btn btn-sm btn-danger btn-delete-user"
                     [disabled]="item.isDeleting">
                     <span *ngIf="item.isDeleting" class="spinner-border spinner-border-sm"></span>
