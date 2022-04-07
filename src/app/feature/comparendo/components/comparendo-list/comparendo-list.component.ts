@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { ComparendoService } from '../../shared/service/comparendo.service';
-import { Comparendo } from '../../shared/model/comparendo';
+import { Comparendo } from '@shared/models/Comparendo/comparendo';
 
 @Component({
   selector: 'app-comparendo-list',

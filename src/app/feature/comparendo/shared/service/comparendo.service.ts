@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from '@core-service/http.service';
 import { environment } from 'src/environments/environment';
-import { Comparendo } from '../model/comparendo';
+import { Comparendo } from '@shared/models/Comparendo/comparendo';
 
 @Injectable()
 export class ComparendoService {

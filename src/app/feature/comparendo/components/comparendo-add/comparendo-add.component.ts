@@ -10,7 +10,7 @@ import { Categoria } from '@shared/models/Categoria/categoria';
 import { CategoriaSharedService } from '@shared/services/Categoria/categoria.service';
 import { Agente } from '@shared/models/Agente/agente';
 import Swal from 'sweetalert2';
-import { Comparendo } from '@comparendo/shared/model/comparendo';
+import { Comparendo } from '@shared/models/Comparendo/comparendo';
 
 @Component({
     selector: 'app-comparendo-add',
