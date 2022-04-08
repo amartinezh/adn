@@ -9,7 +9,6 @@ import { MenuItem } from '@core/modelo/menu-item';
 export class AppComponent {
   title = 'ADN';
   public menu: MenuItem[] = [
-    { url: '/home', nombre: 'Inicio' },
     { url: '/agente', nombre: 'Agente' },
     { url: '/categoria', nombre: 'Categoria' },
     { url: '/comparendo', nombre: 'Comparendos' }

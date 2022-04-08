@@ -4,7 +4,7 @@ import { SecurityGuard } from '@core/guard/security.guard';
 import { HomeComponent } from '@home/home.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: '/agente', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, canActivate: [SecurityGuard] },
   { path: 'agente', loadChildren: () => import('@agente/agente.module').then(mod => mod.AgenteModule), canActivate: [SecurityGuard] },
   {
