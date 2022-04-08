@@ -13,6 +13,8 @@ import Swal from 'sweetalert2';
 
 export class ComparendoListComponent implements OnInit {
   comparendos!: Comparendo[];
+  INICIO_LABOR = 8;
+  FIN_LABOR = 23;
 
   notificacion = Swal.mixin({
     toast: true,
@@ -44,10 +46,8 @@ export class ComparendoListComponent implements OnInit {
   }
 
   public validarHora() {
-    const INICIO_LABOR = 8;
-    const FIN_LABOR = 18;
     const now = new Date();
-    if (now.getHours() > INICIO_LABOR && now.getHours() < FIN_LABOR) {
+    if (now.getHours() > this.INICIO_LABOR && now.getHours() < this.FIN_LABOR) {
       return true;
     }
     else {
@@ -81,7 +81,6 @@ export class ComparendoListComponent implements OnInit {
     const res = this.comparendos.find(x => x.id === id);
     if (!res) { return; }
     if (this.validarHora()) {
-      console.log('luego de consultar' + res.fecha);
       if (this.validarFecha(res.fecha)) {
         this.router.navigate(['edit/' + id], { relativeTo: this.route });
       }

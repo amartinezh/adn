@@ -7,7 +7,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CategoriaMock, CategoriaMockArray } from '../model/categoriaMock';
 import { of } from 'rxjs';
 
-describe('AGENTE DE TRÁNSITO', () => {
+describe('CATEGORIA DE VEHÍCULO', () => {
   let service: CategoriaService;
   let http: HttpService;
 
@@ -21,7 +21,7 @@ describe('AGENTE DE TRÁNSITO', () => {
     http = TestBed.inject(HttpService);
   });
 
-  it('AGENTE {Deberia ser creada}', () => {
+  it('CATEGORIA {Deberia ser creada}', () => {
     const categoriaService: CategoriaService = TestBed.inject(CategoriaService);
     expect(categoriaService).toBeTruthy();
   });
@@ -46,7 +46,7 @@ describe('AGENTE DE TRÁNSITO', () => {
     expect(spyDoGet).toHaveBeenCalled();
   });
 
-  it('should return an Obsevable<Agente[]>', () => {
+  it('should return an Obsevable<Categoria[]>', () => {
     const spyDoGet = spyOn(http, 'doGet').and.returnValue(of(CategoriaMockArray));
 
     service.consultar().subscribe((res: Categoria[]) => {

@@ -43,7 +43,6 @@ describe('Comparendo E2E', () => {
         pagAddComparendo.ingresarInputcategoriasIdComparendo('1');
         pagAddComparendo.ingresarInputagentesIdCrearComparendo('1');
         pagAddComparendo.ingresarInputValorCrearComparendo(1220);
-        pagAddComparendo.clickBotonGuardarComparendo();
         const res = pagAddComparendo.getlinkMensaje();
         expect(res).toBeUndefined();
     });
