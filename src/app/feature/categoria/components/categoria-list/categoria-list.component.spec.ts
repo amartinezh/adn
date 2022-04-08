@@ -3,7 +3,7 @@ import { of } from 'rxjs';
 
 import { CategoriaListComponent } from './categoria-list.component';
 import { CategoriaServiceMock } from '@categoria/shared/service/categoria.service.mock';
-import { Categoria } from '@shared/models/categoria/categoria';
+import { Categoria } from '@shared/models/Categoria/categoria';
 import { CommonModule } from '@angular/common';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpService } from 'src/app/core/services/http.service';
